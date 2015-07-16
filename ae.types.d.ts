@@ -17,7 +17,7 @@ declare var writeLn: (text: string) => void;
 declare var isValid: (obj: Object) => boolean;
 
 /** Provides access to objects and application settings within the After Effects application. The single global object is always available by its name, app. */
-interface Application {
+declare class Application {
 	/** The current After Effects project. */
 	project: Project;
 	
@@ -43,7 +43,7 @@ interface Application {
 	settings: Settings;
 	
 	/** A callback function that is called when an error occurs in the application. */
-	onError: string;
+	onError: string | void;
 	
 	/** A numeric status code used when executing a script
 		externally (that is, from a command line or AppleScript).
@@ -61,16 +61,16 @@ interface Application {
 	memoryInUse: number;
 	
 	/** The effects available in the application. */
-	effects: Object[];
+	effects: {displayName: string, matchName: string, version: string, category: string}[];
 	
 	/** The currently focused or last-focused viewer panel. */
 	activeViewer: Viewer;
 	
 	/** Creates a new project in After Effects. */
-	newProject(): Project;
+	newProject(): Project | void;
 	
 	/** Opens a project or an Open Project dialog box. */
-	open(file?: File): Project;
+	open(file?: File): Project | void;
 	
 	/** Quits the application. */
 	quit(): void;
@@ -119,7 +119,7 @@ interface Application {
 }
 
 /** The AVItem object provides access to attributes and methods of audio/visual files imported into After Effects. */
-interface AVItem extends Item {
+declare class AVItem extends Item {
 	/** The name of the object as shown in the Project panel. */
 	name: string;
 	
@@ -169,7 +169,7 @@ interface AVItem extends Item {
 	setProxyWithSequence(file: File, forceAlphabetical: boolean): void;
 	
 	/** Sets a solid as a proxy for the item. */
-	setProxyWithSolid(color: number[], name: string, width: number, height: number, pixelAspect: number): void;
+	setProxyWithSolid(color: [number, number, number], name: string, width: number, height: number, pixelAspect: number): void;
 	
 	/** Sets a placeholder as a proxy for the item. */
 	setProxyWithPlaceholder(name: string, width: number, height: number, frameRate: number, duration: number): void;
@@ -179,7 +179,7 @@ interface AVItem extends Item {
 }
 
 /** The AVLayer object provides an interface to those layers that contain AVItem objects (composition layers, footage layers, solid layers, text layers, and sound layers). */
-interface AVLayer extends Layer {
+declare class AVLayer extends Layer {
 	/** The source item for this layer. */
 	source: AVItem;
 	
@@ -268,7 +268,7 @@ interface AVLayer extends Layer {
 	audioActiveAtTime(time: number): boolean;
 	
 	/** Calculates a transformation from a set of points in this layer. */
-	calculateTransformFromPoints(pointTopLeft: number[], pointTopRight: number[], pointBottomRight: number[]): Object;
+	calculateTransformFromPoints(pointTopLeft: [number, number, number], pointTopRight: [number, number, number], pointBottomRight: [number, number, number]): Object;
 	
 	/** Changes the source item for this layer. */
 	replaceSource(newSource: AVItem, fixExpressions: boolean): void;
@@ -281,16 +281,16 @@ interface AVLayer extends Layer {
 }
 
 /** The CameraLayer object represents a camera layer within a composition. Create it using the LayerCollection object’s addCamera method */
-interface CameraLayer extends Layer { }
+declare class CameraLayer extends Layer { }
 
 /** Like an array, a collection associates a set of objects or values as a logical group and provides access to them by index. However, most collection objects are read-only. You do not assign objects to them yourself—their contents update automatically as objects are created or deleted. */
-interface Collection {
+declare class Collection {
 	/** The number of objects in the collection. */
 	length: number;
 }
 
 /** The CompItem object represents a composition, and allows you to manipulate and get information about it. Access the objects by position index number in a project’s item collection. */
-interface CompItem extends AVItem {
+declare class CompItem extends AVItem {
 	/** The duration of a single frame. */
 	frameDuration: number;
 	
@@ -325,16 +325,16 @@ interface CompItem extends AVItem {
 	preserveNestedResolution: boolean;
 	
 	/** The background color of the composition. */
-	bgColor: number[];
+	bgColor: [number, number, number];
 	
 	/** The current active camera layer. */
-	activeCamera: CameraLayer;
+	activeCamera: CameraLayer | void;
 	
 	/** Changes the display of the start time in the Timeline panel. */
-	displayStartTime: number[];
+	displayStartTime: number;
 	
 	/** The factor by which the x and y resolution of the Composition panel is downsampled. */
-	resolutionFactor: number;
+	resolutionFactor: [number, number];
 	
 	/** The camera shutter angle. */
 	shutterAngle: number;
@@ -376,7 +376,7 @@ interface CompItem extends AVItem {
 }
 
 /** The FileSource object describes footage that comes from a file. */
-interface FileSource extends FootageSource {
+declare class FileSource extends FootageSource {
 	/** The file that defines this asset. */
 	file: File;
 	
@@ -388,7 +388,7 @@ interface FileSource extends FootageSource {
 }
 
 /** The FolderItem object corresponds to a folder in your Project panel. It can contain various types of items (footage, compositions, solids) as well as other folders. */
-interface FolderItem extends Item {
+declare class FolderItem extends Item {
 	/** The contents of this folder. */
 	items: ItemCollection;
 	
@@ -400,7 +400,7 @@ interface FolderItem extends Item {
 }
 
 /** The FootageItem object represents a footage item imported into a project, which appears in the Project panel. These are accessed by position index number in a project’s item collection. */
-interface FootageItem extends AVItem {
+declare class FootageItem extends AVItem {
 	/** The footage source file. */
 	file: File;
 	 
@@ -417,14 +417,14 @@ interface FootageItem extends AVItem {
 	replaceWithSequence(file: File, forceAlphabetical: boolean): void;
 	 
 	/** Replaces a footage file with a solid. */
-	replaceWithSolid(color: number[], name: string, width: number, height: number, pixelAspect: number): void;
+	replaceWithSolid(color: [number, number, number], name: string, width: number, height: number, pixelAspect: number): void;
 	 
 	/** Opens the footage in a Footage panel. */
 	openInViewer(): Viewer;
 } 
  
 /** The FootageSource object holds information describing the source of some footage. It is used as the mainSource of a FootageItem, or the proxySource of a CompItem or FootageItem. */
-interface FootageSource {
+declare class FootageSource {
 	/** When true, a footage clip or proxy includes an alpha channel. */
 	hasAlpha: boolean;
 	 
@@ -432,7 +432,7 @@ interface FootageSource {
 	alphaMode: AlphaMode;
 	 
 	/** The color to be premultiplied. */
-	premulColor: number[];
+	premulColor: [number, number, number];
 	 
 	/** When true, an alpha channel in a footage clip or proxy should be inverted. */
 	invertAlpha: boolean;
@@ -447,7 +447,7 @@ interface FootageSource {
 	highQualityFieldSeparation: boolean;
 	 
 	/** The pulldown type for the footage. */
-	removePulldown: PulldownPhase
+	removePulldown: PulldownPhase;
 	 
 	/** How many times an image sequence is set to loop. */
 	loop: number;
@@ -489,7 +489,7 @@ declare class ImportOptions {
 }
  
 /** The Item object represents an item that can appear in the Project panel. */
-interface Item {
+declare class Item {
 	/** The name of the object as shown in the Project panel. */
 	name: string;
 	 
@@ -516,7 +516,7 @@ interface Item {
 }
  
 /** The ItemCollection object represents a collection of items. The ItemCollection belonging to a Project object contains all the Item objects for items in the project. The ItemCollection belonging to a FolderItem object contains all the Item objects for items in that folder. */
-interface ItemCollection extends Collection {
+declare class ItemCollection extends Collection {
 	/** Creates a new CompItem object and adds it to the collection. */
 	addComp(name: string, width: number, height: number, pixelAspect: number, duration: number, frameRate: number): CompItem;
 	 
@@ -536,7 +536,7 @@ declare class KeyframeEase {
 }
  
 /** The Layer object provides access to layers within compositions. It can be accessed from an item’s layer collection either by index number or by a name string. */
-interface Layer {
+declare class Layer {
 	/** The index position of the layer. */
 	index: number;
 	
@@ -544,7 +544,7 @@ interface Layer {
 	name: string;
 	
 	/** The parent of this layer. */
-	parent: Layer;
+	parent: Layer | void;
 	
 	/** The current time of the layer. */
 	time: number;
@@ -626,7 +626,7 @@ interface Layer {
 }
 
 /** The LayerCollection object represents a set of layers. The LayerCollection belonging to a CompItem object contains all the layer objects for layers in the composition. The methods of the collection object allow you to manipulate the layer list. */
-interface LayerCollection extends Collection {
+declare class LayerCollection extends Collection {
 	/** Creates a new AVLayer and adds it to this collection. */
 	add(item: AVItem, duration?: number): AVLayer;
 	
@@ -634,21 +634,19 @@ interface LayerCollection extends Collection {
 	addNull(duration?: number): AVLayer;	
 	
 	/** Creates a new layer, a FootageItem with a SolidSource, and adds it to this collection. */
-	addSolid(color: number[], name: string, width: number, height: number, pixelAspect: number, duration?: number): AVLayer;
+	addSolid(color: [number, number, number], name: string, width: number, height: number, pixelAspect: number, duration?: number): AVLayer;
 	
 	/** Creates a new point text layer and adds it to this collection. */
-	addText(sourceText: string): TextLayer;
-	addText(sourceText: TextDocument): TextLayer;
+	addText(sourceText: string | TextDocument): TextLayer;
 	
 	/** Creates a new paragraph (box) text layer and adds it to this collection. */
-	addBoxText(size: number[], sourceText: string): TextLayer;
-	addBoxText(size: number[], sourceText: TextDocument): TextLayer;
+	addBoxText(size: [number, number], sourceText: string | TextDocument): TextLayer;
 	
 	/** Creates a new camera layer and adds it to this collection. */
-	addCamera(name: string, centerPoint: number[]): CameraLayer;
+	addCamera(name: string, centerPoint: [number, number]): CameraLayer;
 	
 	/** Creates a new light layer and adds it to this collection. */
-	addLight(name: string, centerPoint: number[]): LightLayer;
+	addLight(name: string, centerPoint: [number, number]): LightLayer;
 	
 	/** Creates a new shape layer and adds it to this collection. */
 	addShape(): ShapeLayer;
@@ -661,7 +659,7 @@ interface LayerCollection extends Collection {
 }
 
 /** The LightLayer object represents a light layer within a composition. Create it using the LayerCollection object’s addLight method */
-interface LightLayer extends Layer {
+declare class LightLayer extends Layer {
 	/** For light layers, the type of light. */
 	lightType: LightType;
 }
@@ -699,7 +697,7 @@ declare class MarkerValue {
 }
 
 /** The MaskPropertyGroup object encapsulates mask attributes in a layer. */
-interface MaskPropertyGroup extends PropertyGroup {
+declare class MaskPropertyGroup extends PropertyGroup {
 	/** The mask mode. */
 	maskMode: MaskMode;
 	
@@ -716,17 +714,17 @@ interface MaskPropertyGroup extends PropertyGroup {
 	locked: boolean;
 	
 	/** The color used to draw the mask outline in the user interface. */
-	color: number[];
+	color: [number, number, number];
 	
 	/** The feather falloff mode for the mask. */
 	maskFeatherFalloff: MaskFeatherFalloff;
 }
 
 /** The OMCollection contains all of the output modules in a render queue. The collection provides access to the OutputModule objects, but does not provide any additional functionality. The first OutputModule object in the collection is at index position 1. */
-interface OMCollection extends Collection {}
+declare class OMCollection extends Collection {}
 
 /** An OutputModule object of a RenderQueueItem generates a single file or sequence via a render operation, and contains attributes and methods relating to the file to be rendered. */
-interface OutputModule {
+declare class OutputModule {
 	/** The path and name of the file to be rendered. */
 	file: File;
 	
@@ -751,21 +749,20 @@ interface OutputModule {
 	/** Applies an output-module template. */
 	applyTemplate(templateName: string): void;
 	
-	getSetting(key: string): any;
+	getSetting(key: string): string | number;
 	
 	getSettings(format: GetSettingsFormat): Object;
 	
-	setSetting(key: string, value: string): void;
-	setSetting(key: string, value: number): void;
+	setSetting(key: string, value: string | number): void;
 	
 	setSettings(settings: Object): void;	
 }
 
 /** The PlaceholderSource object describes the footage source of a placeholder. */
-interface PlaceholderSource extends FootageSource {}
+declare class PlaceholderSource extends FootageSource {}
 
 /** The project object represents an After Effects project. Attributes provide access to specific objects within the project, such as imported files or footage and compositions, and also to project settings such as the timecode base. Methods can import footage, create solids, compositions and folders, and save changes. */
-interface Project {
+declare class Project {
 	/** The file for the currently open project. */
 	file: File;
 	
@@ -776,7 +773,7 @@ interface Project {
 	items: ItemCollection;
 	
 	/** The currently active item. */
-	activeItem: Item;
+	activeItem: Item | void;
 	
 	/** The color depth of the current project. */
 	bitsPerChannel: number;
@@ -854,13 +851,15 @@ interface Project {
 	autoFixExpressions(oldText: string, newText: string): void;
 }
 
+declare type PropertyValue = void | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
+
 /** The Property object contains value, keyframe, and expression information about a particular AE property of a layer. */
-interface Property extends PropertyBase {
+declare class Property extends PropertyBase {
 	/** Type of value stored in this property. */
 	propertyValueType: PropertyValueType;
 	
 	/** Current value of the property. */
-	value: any;
+	value: PropertyValue;
 	
 	/** When true, there is a minimum permitted value. */
 	hasMin: boolean;
@@ -923,19 +922,19 @@ interface Property extends PropertyBase {
 	separationLeader: Property;
 	
 	/** Gets the value of the property evaluated at given time. */
-	valueAtTime(time: number, preExpression: boolean): any;
+	valueAtTime(time: number, preExpression: boolean): PropertyValue;
 	
 	/** Sets the static value of the property. */
-	setValue(newValue: any): void;
+	setValue(newValue: PropertyValue): void;
 	
 	/** Creates a keyframe for the property. */
-	setValueAtTime(time: number, newValue: any): void;
+	setValueAtTime(time: number, newValue: PropertyValue): void;
 	
 	/** Creates a set of keyframes for the property. */
-	setValuesAtTimes(times: number[], newValues: any[]): void;
+	setValuesAtTimes(times: number[], newValues: PropertyValue[]): void;
 	
 	/** Finds a keyframe and sets the value of the property at that keyframe. */
-	setValueAtKey(keyIndex: number, newValue: any): void;
+	setValueAtKey(keyIndex: number, newValue: PropertyValue): void;
 	
 	/** Gets the keyframe nearest to a specified time. */
 	nearestKeyIndex(time: number): number;
@@ -967,22 +966,25 @@ interface Property extends PropertyBase {
 	keyOutInterpolationType(keyIndex: number): KeyframeInterpolationType;
 	
 	/** Sets the “in” and “out” tangent vectors for a key. */
-	setSpatialTangentsAtKey(keyIndex: number, inTangent: number[], outTangent: number[]): void;
+	setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number], outTangent: [number, number]): void;
+	setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number, number], outTangent: [number, number, number]): void;
 	
 	/** Gets the “in” spatial tangent for a key. */
-	keyInSpatialTangent(keyIndex: number): number[];
+	keyInSpatialTangent(keyIndex: number): [number, number] | [number, number, number];
 	
 	/** Gets the “out” spatial tangent for a key. */
-	keyOutSpatialTangent(keyIndex: number): number[];
+	keyOutSpatialTangent(keyIndex: number): [number, number] | [number, number, number];
 	
 	/** Sets the “in” and “out” temporal ease for a key. */
-	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: KeyframeEase[], outTemporalEase: KeyframeEase[]): void;
+	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase], outTemporalEase: [KeyframeEase]): void;
+	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase], outTemporalEase: [KeyframeEase, KeyframeEase]): void;
+	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase, KeyframeEase], outTemporalEase: [KeyframeEase, KeyframeEase, KeyframeEase]): void;
 	
 	/** Gets the “in” temporal ease for a key. */
-	keyInTemporalEase(keyIndex: number): KeyframeEase[];
+	keyInTemporalEase(keyIndex: number): [KeyframeEase] | [KeyframeEase, KeyframeEase] | [KeyframeEase, KeyframeEase, KeyframeEase];
 	
 	/** Gets the “out” temporal ease for a key. */
-	keyOutTemporalEase(keyIndex: number): KeyframeEase[];
+	keyOutTemporalEase(keyIndex: number): [KeyframeEase] | [KeyframeEase, KeyframeEase] | [KeyframeEase, KeyframeEase, KeyframeEase];
 	
 	/** Sets whether a keyframe has temporal continuity. */
 	setTemporalContinuousAtKey(keyIndex: number, newVal: boolean): void;
@@ -1025,7 +1027,7 @@ interface Property extends PropertyBase {
 }
 
 /** Properties are accessed by name through layers, using various kinds of expression syntax, as controlled by application preferences. */
-interface PropertyBase {
+declare class PropertyBase {
 	/** Name of the property. */
 	name: string;
 	
@@ -1069,7 +1071,7 @@ interface PropertyBase {
 	selected: boolean;
 	
 	/** Gets the parent group for this property. */
-	propertyGroup(countUp?: number): PropertyGroup;
+	propertyGroup(countUp?: number): PropertyGroup | void;
 	
 	/** Removes this from the project. */
 	remove(): void;
@@ -1082,7 +1084,7 @@ interface PropertyBase {
 }
 
 /** The PropertyGroup object represents a group of properties. It can contain Property objects and other PropertyGroup objects. Property groups can be nested to provide a parent-child hierarchy, with a Layer object at the top (root) down to a single Property object, such as the mask feather of the third mask. To traverse the group hierarchy, use PropertyBase methods and attributes. */
-interface PropertyGroup  extends PropertyBase {
+declare class PropertyGroup  extends PropertyBase {
 	/** The number of indexed properties in the group. */
 	numProperties: number;
 	
@@ -1098,7 +1100,7 @@ interface PropertyGroup  extends PropertyBase {
 }
 
 /** The RenderQueue object represents the render automation process, the data and functionality that is available through the Render Queue panel of a particular After Effects project. Attributes provide access to items in the render queue and their render status. Methods can start, pause, and stop the rendering process. */
-interface RenderQueue {
+declare class RenderQueue {
 	/** When true, a render is in progress. */
 	rendering: boolean;
 	
@@ -1125,7 +1127,7 @@ interface RenderQueue {
 }
 
 /** The RenderQueueItem object represents an individual item in the render queue. It provides access to the specific settings for an item to be rendered. Create the object by adding a composition to the Render Queue with the RQItemCollection object; */
-interface RenderQueueItem {
+declare class RenderQueueItem {
 	/** The total number of Output Modules assigned to the item. */
 	numOutputModules: number;
 	
@@ -1160,7 +1162,7 @@ interface RenderQueueItem {
 	status: RQItemStatus;
 	
 	/** A callback function that is called during the rendering process when the status of the item changes. */
-	onStatusChanged: string;
+	onStatusChanged: string | void;
 	
 	/** A log type for this item. */
 	logType: LogType;
@@ -1180,24 +1182,23 @@ interface RenderQueueItem {
 	/** Duplicates this item. */
 	duplicate(): RenderQueueItem;
 	
-	getSetting(key: string): any;
+	getSetting(key: string): string | number;
 	
 	getSettings(format: GetSettingsFormat): Object;
 	
-	setSetting(key: string, value: string): void;
-	setSetting(key: string, value: number): void;
+	setSetting(key: string, value: string | number): void;
 	
 	setSettings(settings: Object): void;	
 }
 
 /** The RQItemCollection contains all of the render-queue items in a project, as shown in the Render Queue panel of the project. The collection provides access to the RenderQueueItem objects, and allows you to create them from compositions. The first RenderQueueItem object in the collection is at index position 1. */
-interface RQItemCollection extends Collection {
+declare class RQItemCollection extends Collection {
 	/** Adds a composition to the Render Queue. */
-	add(comp: CompItem): void;
+	add(comp: CompItem): RenderQueueItem;
 }
 
 /** The Settings object provides an easy way to manage settings for scripts. The settings are saved in the After Effects preferences file and are persistent between application sessions. Settings are identified by section and key within the file, and each key name is associated with a value. In the preferences file, section names are enclosed in brackets and quotation marks, and key names are listing in quotation marks below the section name. All values are strings. */
-interface Settings {
+declare class Settings {
 	/** Saves a default value for a setting. */
 	saveSetting(sectionName: string, keyName: string, value: string, type?: PREFType): void;
 	
@@ -1214,13 +1215,13 @@ declare class Shape {
 	closed: boolean;
 	
 	/** The anchor points of the shape. */
-	vertices: number[][];
+	vertices: [number, number][];
 	
 	/** The tangent vectors coming into the shape vertices. */
-	inTangents: number[][];
+	inTangents: [number, number][];
 	
 	/** The tangent vectors coming out of the shape vertices. */
-	outTangents: number[][];
+	outTangents: [number, number][];
 	
 	/** The mask path segment (sections of a mask path between vertices) containing each feather point. */
 	featherSegLocs: number[];
@@ -1245,16 +1246,16 @@ declare class Shape {
 }
 
 /** The ShapeLayer object represents a shape layer within a composition. Create it using the LayerCollection object’s addShape() method. */
-interface ShapeLayer extends AVLayer {}
+declare class ShapeLayer extends AVLayer {}
 
 /** The SolidSource object represents a solid-color footage source. */
-interface SolidSource extends FootageSource {
+declare class SolidSource extends FootageSource {
 	/** The color of the solid. */
-	color: number[];
+	color: [number, number, number];
 }
 
 /** The System object provides access to attributes found on the user’s system, such as the user name and the name and version of the operating system. It is available through the system global variable. */
-interface System {
+declare class System {
 	/** The current user name. */
 	userName: string;
 	
@@ -1300,10 +1301,10 @@ declare class TextDocument {
 	applyStroke: boolean;
 	
 	/** The text layer’s fill color. */
-	fillColor: number[];
+	fillColor: [number, number, number];
 	
 	/** The text layer’s stroke color. */
-	strokeColor: number[];
+	strokeColor: [number, number, number];
 	
 	/** Indicates the rendering order for the fill and stroke of a text layer. */
 	strokeOverFill: boolean;
@@ -1324,7 +1325,7 @@ declare class TextDocument {
 	boxText: boolean;
 	
 	/** For box text, the pixel dimensions for the text bounds. */
-	boxTextSize: number[];
+	boxTextSize: [number, number];
 	
 	/** Restores the default character settings in the Character panel. */
 	resetCharStyle(): void;
@@ -1334,10 +1335,10 @@ declare class TextDocument {
 }
 
 /** The TextLayer object represents a text layer within a composition. Create it using the LayerCollection object’s addText method. */
-interface TextLayer extends AVLayer {}
+declare class TextLayer extends AVLayer {}
 
 /** The Viewer object represents a Composition, Layer, or Footage panel. */
-interface Viewer {
+declare class Viewer {
 	/** The type of content in the viewer. */
 	type: ViewerType;
 	
@@ -1355,7 +1356,7 @@ interface Viewer {
 	setActive(): boolean;
 }
 
-interface View {
+declare class View {
 	active: boolean;
 	
 	options: ViewOptions;
@@ -1363,6 +1364,6 @@ interface View {
 	setActive(): void;
 }
 
-interface ViewOptions {
+declare class ViewOptions {
 	fastPreview: FastPreviewType;
 }

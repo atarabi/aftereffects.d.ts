@@ -3,7 +3,7 @@
 TypeScript interface for After Effects Script.
 
 ## Usage
-`/// <reference path="./aftereffects.d.ts"/>`
+`/// <reference path="./ae.d.ts"/>`
 
 ## Compile
-`tsc script.ts -t "ES3" -noLib`
+`tsc script.ts --out script.jsx -t "ES3" -noLib`
