@@ -268,7 +268,7 @@ declare class AVLayer extends Layer {
 	audioActiveAtTime(time: number): boolean;
 	
 	/** Calculates a transformation from a set of points in this layer. */
-	calculateTransformFromPoints(pointTopLeft: [number, number, number], pointTopRight: [number, number, number], pointBottomRight: [number, number, number]): Object;
+	calculateTransformFromPoints(pointTopLeft: [number, number, number], pointTopRight: typeof pointTopLeft, pointBottomRight: typeof pointTopLeft): Object;
 	
 	/** Changes the source item for this layer. */
 	replaceSource(newSource: AVItem, fixExpressions: boolean): void;
@@ -534,7 +534,7 @@ declare class KeyframeEase {
 	/** The influence setting for a keyframe. */
 	influence: number;
 }
- 
+
 /** The Layer object provides access to layers within compositions. It can be accessed from an item’s layer collection either by index number or by a name string. */
 declare class Layer {
 	/** The index position of the layer. */
@@ -542,7 +542,7 @@ declare class Layer {
 	
 	/** The name of the layer. */
 	name: string;
-	
+		
 	/** The parent of this layer. */
 	parent: Layer | void;
 	
@@ -623,6 +623,17 @@ declare class Layer {
 	
 	/** Applies a named collection of animation settings to the layer. */
 	applyPreset(presetName: File): void;
+	
+	//From Property
+	matchName: string;
+	propertyDepth: number;
+	propertyType: PropertyType;
+	selected: boolean;
+	numProperties: number;
+	
+	propertyGroup(countUp?: number): PropertyGroup | void;
+	property(index: number): PropertyBase;
+	property(name: string): PropertyBase;
 }
 
 /** The LayerCollection object represents a set of layers. The LayerCollection belonging to a CompItem object contains all the layer objects for layers in the composition. The methods of the collection object allow you to manipulate the layer list. */
@@ -966,8 +977,8 @@ declare class Property extends PropertyBase {
 	keyOutInterpolationType(keyIndex: number): KeyframeInterpolationType;
 	
 	/** Sets the “in” and “out” tangent vectors for a key. */
-	setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number], outTangent: [number, number]): void;
-	setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number, number], outTangent: [number, number, number]): void;
+	setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number], outTangent: typeof inTangent): void;
+	setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number, number], outTangent: typeof inTangent): void;
 	
 	/** Gets the “in” spatial tangent for a key. */
 	keyInSpatialTangent(keyIndex: number): [number, number] | [number, number, number];
@@ -976,9 +987,9 @@ declare class Property extends PropertyBase {
 	keyOutSpatialTangent(keyIndex: number): [number, number] | [number, number, number];
 	
 	/** Sets the “in” and “out” temporal ease for a key. */
-	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase], outTemporalEase: [KeyframeEase]): void;
-	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase], outTemporalEase: [KeyframeEase, KeyframeEase]): void;
-	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase, KeyframeEase], outTemporalEase: [KeyframeEase, KeyframeEase, KeyframeEase]): void;
+	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase], outTemporalEase: typeof inTemporalEase): void;
+	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase], outTemporalEase: typeof inTemporalEase): void;
+	setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase, KeyframeEase], outTemporalEase: typeof inTemporalEase): void;
 	
 	/** Gets the “in” temporal ease for a key. */
 	keyInTemporalEase(keyIndex: number): [KeyframeEase] | [KeyframeEase, KeyframeEase] | [KeyframeEase, KeyframeEase, KeyframeEase];
