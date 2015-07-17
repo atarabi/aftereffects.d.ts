@@ -176,85 +176,9 @@ declare class MouseEvent extends UIEvent {
 	initMouseEvent (eventName: string, bubble: boolean, isCancelable: boolean, view: any, detail: number, screenX: number, screenY: number, clientX: number, clientY: number, ctrlKey: boolean, altKey: boolean, shiftKey: boolean, metaKey: boolean, button: number, relatedTarget?: any): void;
 }
 
-declare class Window {
-	static frameworkName: string;
-	static version: string;
-	
-	static alert(message: string, title?: string, errorIcon?: boolean): void;
-	static confirm(message: string, noAsDflt?: boolean, title?: string): boolean;
-	static find(resourceName: string): Window;
-	static find(type: string, title: string): Window;
-	static prompt(message: string, preset: string, title?: string): string;
-
-	constructor(type: string, title?: string, bounds?: Bounds, creation_properties?: {
-		resizeable?: boolean,
-		closeButton?: boolean,
-		maximizeButton?: boolean,
-		minimizeButton?: boolean,
-		independent?: boolean,
-		borderless?: boolean
-	});
-
-	active: boolean;
-	alignChildren: string | [string, string];
-	alignment: string | [string, string];
-	bounds: Bounds;
-	cancelElement: any;
-	children: any[];
-	defaultElement: any;
-	enabled: boolean;
-	frameBounds: Bounds;
-	frameLocation: Point;
-	frameSize: Dimension;
-	graphics: ScriptUIGraphics;
-	helpTip: string;
-	layout: any;
-	location: Point;
-	margins: Margins;
-	maximized: boolean;
-	maximumSize: Dimension;
-	minimized: boolean;
-	minimumSize: Dimension;
-	opacity: number;
-	orientation: string;
-	parent: any;
-	preferredSize: Dimension;
-	properties: any;
-	resizeable: boolean;
-	shortcutKey: string;
-	size: Dimension;
-	spacing: number;
-	text: string;
-	type: string;
-	visible: boolean;
-	window: Window;
-	windowBounds: Bounds;
-
-	add(type: string, ...others): any;
-	addEventListener(eventName: string, handler: Function, capturePhase?: boolean): void;
-	center(window?: Window): void;
-	close(result?: number): void;
-	dispatchEvent(eventObj: UIEvent): boolean;
-	findElement(name: string): any;
-	hide(): void;
-	notify(event: string): void;
-	remove(index: number): void;
-	remove(text: string): void;
-	remove(child: any): void;
-	removeEventListener(eventName: string, handler: Function, capturePhase?: boolean): void;
-	show(): any;
-	update(): void;
-
-	onActivate: Function | void;
-	onClose: Function | void;
-	onDeactivate: Function | void;
-	onDraw: Function | void;
-	onMove: Function | void;
-	onMoving: Function | void;
-	onResize: Function | void;
-	onResizing: Function | void;
-	onShortcutKey: Function | void;
-	onShow: Function | void;
+declare class AutoLayoutManager {
+	layout(recalculate?: boolean): void;
+	resize(): void;
 }
 
 interface _TitleLayout {
@@ -266,16 +190,15 @@ interface _TitleLayout {
 	truncate: string;
 }
 
-declare class _Container {
+declare class _WindowOrContainer {
 	alignChildren: string | [string, string];
 	alignment: string | [string, string];
 	bounds: Bounds;
-	characters: number;
 	children: any[];
 	enabled: boolean;
 	graphics: ScriptUIGraphics;
 	helpTip: string;
-	layout: any;
+	layout: AutoLayoutManager;
 	location: Point;
 	margins: Margins;
 	maximumSize: Dimension;
@@ -291,7 +214,24 @@ declare class _Container {
 	window: Window;
 	windowBounds: Bounds;
 	
-	add(type: string, ...others): any;
+	add(button: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): any;
+	add(checkbox: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): any;
+	add(dropdownlist: string, bounds: Bounds, items?: string[], creation_properties?: {name?: string; items?: string[];}): any;
+	add(edittext: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string; readonly?: boolean; noecho?: boolean; enterKeySignalsOnChange?: boolean; borderless?: boolean; multiline?: boolean; scrollable?: boolean;}): any;
+	add(flashplayer: string, bounds?: Bounds, movieToLoad?: string | File, creation_properties?: {name?: string;}): any;
+	add(group: string, bounds?: Bounds, creation_properties?: {name?: string;}): any;
+	add(iconbutton: string, bounds?: Bounds, icon?: string | File, creation_properties?: {name?: string; style?: string; toggle?: boolean;}): any;
+	add(image: string, bounds?: Bounds, icon?: string | File, creation_properties?: {name?: string;}): any;
+	add(listbox: string, bounds: Bounds, items?: string[], creation_properties?: {name?: string; multiselect?: boolean; items?: string[]; numberOfColumns?: number; showHeaders?: boolean; columnWidths?: number[]; columnTitles?: string[];}): any;
+	add(panel: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string; borderStyle?: string; su1PanelCoordinates?: boolean;}): any;
+	add(progressbar: string, bounds?: Bounds, value?: number, minvalue?: number, maxvalue?: number, creation_properties?: {name?: string;}): any;
+	add(radiobutton: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): any;
+	add(scrollbar: string, bounds?: Bounds, value?: number, minvalue?: number, maxvalue?: number, creation_properties?: {name?: string;}): any;
+	add(slider: string, bounds?: Bounds, value?: number, minvalue?: number, maxvalue?: number, creation_properties?: {name?: string;}): any;
+	add(statictext: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string; multiline?: boolean; scrolling?: boolean; truncate?: string;}): any;
+	add(tab: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): any;
+	add(tabbedpanel: string, bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): any;
+	add(treeview: string, bounds?: Bounds, items?: string[], creation_properties?: {name?: string; itmes?: string[];}): any;
 	addEventListener(eventName: string, handler: Function, capturePhase?: boolean): void;
 	dispatchEvent(eventObj: UIEvent): boolean;
 	findElement(name: string): any;
@@ -303,7 +243,58 @@ declare class _Container {
 	removeEventListener(eventName: string, handler: Function, capturePhase?: boolean): void;
 	show(): any;
 	
-	onDraw: Function | void;
+	onDraw: Function;
+}
+
+declare class Window extends _WindowOrContainer{
+	static frameworkName: string;
+	static version: string;
+	
+	static alert(message: string, title?: string, errorIcon?: boolean): void;
+	static confirm(message: string, noAsDflt?: boolean, title?: string): boolean;
+	static find(resourceName: string): Window;
+	static find(type: string, title: string): Window;
+	static prompt(message: string, preset: string, title?: string): string;
+
+	constructor(type: string, title?: string, bounds?: Bounds, creation_properties?: {
+		resizeable?: boolean;
+		closeButton?: boolean;
+		maximizeButton?: boolean;
+		minimizeButton?: boolean;
+		independent?: boolean;
+		borderless?: boolean;
+	});
+
+	active: boolean;
+	cancelElement: any;
+	defaultElement: any;
+	frameBounds: Bounds;
+	frameLocation: Point;
+	frameSize: Dimension;
+	maximized: boolean;
+	minimized: boolean;
+	opacity: number;
+	resizeable: boolean;
+	shortcutKey: string;
+	text: string;
+
+	center(window?: Window): void;
+	close(result?: number): void;
+	update(): void;
+
+	onActivate: Function;
+	onClose: Function;
+	onDeactivate: Function;
+	onMove: Function;
+	onMoving: Function;
+	onResize: Function;
+	onResizing: Function;
+	onShortcutKey: Function;
+	onShow: Function;
+}
+
+declare class _Container extends _WindowOrContainer {
+	characters: number;
 }
 
 declare class Panel extends _Container {
@@ -331,7 +322,7 @@ declare class __Control {
 	removeEventListener(eventName: string, handler: Function, capturePhase?: boolean): void;
 	show(): any;
 	
-	onDraw: Function | void;
+	onDraw: Function;
 }
 
 declare class _Control extends __Control {
@@ -366,7 +357,7 @@ declare class _ListControl extends _Control {
 	remove(child: ListItem): void;
 	removeAll(): void;
 	
-	onChange: Function | void;
+	onChange: Function;
 }
 
 declare class Button extends _Control {
@@ -375,8 +366,8 @@ declare class Button extends _Control {
 	shortcutKey: string;
 	text: string;
 	
-	onClick: Function | void;
-	onShortcutKey: Function | void;
+	onClick: Function;
+	onShortcutKey: Function;
 }
 
 declare class Checkbox extends _Control {
@@ -386,8 +377,8 @@ declare class Checkbox extends _Control {
 	text: string;
 	value: boolean;
 	
-	onClick: Function | void;
-	onShortcutKey: Function | void;
+	onClick: Function;
+	onShortcutKey: Function;
 }
 
 declare class DropDownList extends _ListControl {
@@ -397,7 +388,7 @@ declare class DropDownList extends _ListControl {
 	title: string;
 	titleLayout: _TitleLayout;
 	
-	onShortcutKey: Function | void;
+	onShortcutKey: Function;
 }
 
 declare class EditText extends _Control {
@@ -407,9 +398,9 @@ declare class EditText extends _Control {
 	text: string;
 	textselection: string;
 	
-	onChange: Function | void;
-	onChanging: Function | void;
-	onShortcutKey: Function | void;
+	onChange: Function;
+	onChanging: Function;
+	onShortcutKey: Function;
 }
 
 declare class FlashPlayer extends _Control {
@@ -423,7 +414,7 @@ declare class FlashPlayer extends _Control {
 	playMovie(rewind: boolean): void;
 	stopMovie(): void;
 	
-	onShortcutKey: Function | void;
+	onShortcutKey: Function;
 }
 
 declare class IconButton extends _Control {
@@ -434,8 +425,8 @@ declare class IconButton extends _Control {
 	title: string;
 	titleLayout: _TitleLayout;
 	
-	onClick: Function | void;
-	onShortcutKey: Function | void;
+	onClick: Function;
+	onShortcutKey: Function;
 }
 
 declare class Image extends _Control {
@@ -446,7 +437,7 @@ declare class Image extends _Control {
 	title: string;
 	titleLayout: _TitleLayout;
 	
-	onShortcutKey: Function | void;
+	onShortcutKey: Function;
 }
 
 declare class ListBox extends _ListControl {
@@ -460,8 +451,8 @@ declare class ListBox extends _ListControl {
 	
 	revealItem(item: ListItem): void;
 
-	onDoubleClick: Function | void;
-	onShortcutKey: Function | void;
+	onDoubleClick: Function;
+	onShortcutKey: Function;
 }
 
 declare class ListItem extends __Control{
@@ -499,8 +490,8 @@ declare class RadioButton extends _Control {
 	text: string;
 	value: boolean;
 	
-	onClick: Function | void;
-	onShortcutKey: Function | void;
+	onClick: Function;
+	onShortcutKey: Function;
 }
 
 declare class Scrollbar extends _Control {
@@ -512,9 +503,9 @@ declare class Scrollbar extends _Control {
 	stepdelta: number;
 	value: number;
 	
-	onChange: Function | void;
-	onChanging: Function | void;
-	onShortcutKey: Function | void;
+	onChange: Function;
+	onChanging: Function;
+	onShortcutKey: Function;
 }
 
 declare class Slider extends _Control {
@@ -525,9 +516,9 @@ declare class Slider extends _Control {
 	text: string;
 	value: number;
 	
-	onChange: Function | void;
-	onChanging: Function | void;
-	onShortcutKey: Function | void;
+	onChange: Function;
+	onChanging: Function;
+	onShortcutKey: Function;
 }
 
 declare class StaticText extends _Control {
@@ -536,7 +527,7 @@ declare class StaticText extends _Control {
 	shortcutKey: string;
 	text: string;
 	
-	onShortcutKey: Function | void;
+	onShortcutKey: Function;
 }
 
 declare class TreeView extends _ListControl {
@@ -544,7 +535,7 @@ declare class TreeView extends _ListControl {
 	selection: ListItem
 	shortcutKey: string;
 	
-	onExpand: Function | void;
-	onCollapse: Function | void;
-	onShortcutKey: Function | void;
+	onExpand: Function;
+	onCollapse: Function;
+	onShortcutKey: Function;
 }
