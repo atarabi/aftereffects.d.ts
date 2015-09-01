@@ -116,6 +116,10 @@ declare class Application {
 	
 	/** Loads a color swatch from an Adobe Swatch Exchange (ASE) file. */
 	parseSwatchFile(file: File): void;
+	
+	findMenuCommandId(str: string): number;
+	
+	executeCommand(id: number): void;
 }
 
 /** The AVItem object provides access to attributes and methods of audio/visual files imported into After Effects. */
@@ -955,7 +959,7 @@ declare class Property extends PropertyBase {
 	keyTime(markerComment: string): number;
 	
 	/** Gets the value of a keyframe at the time at which a condition occurs. */
-	keyValue(keyIndex: number): number;
+	keyValue(keyIndex: number): PropertyValue;
 	keyValue(markerComment: string): MarkerValue;
 	
 	/** Adds a new keyframe to the property at a given time. */
