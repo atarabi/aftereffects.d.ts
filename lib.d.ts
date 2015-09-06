@@ -422,6 +422,8 @@ interface String {
     substr(from: number, length?: number): string;
 
     [index: number]: string;
+    
+    toJSON(key?: any): string;
 }
 
 /** 
@@ -435,6 +437,7 @@ declare var String: {
 }
 
 interface Boolean {
+  toJSON(key?: any): string;
 }
 declare var Boolean: {
     new (value?: any): Boolean;
@@ -466,6 +469,8 @@ interface Number {
       * @param precision Number of significant digits. Must be in the range 1 - 21, inclusive.
       */
     toPrecision(precision?: number): string;
+    
+    toJSON(key?: any): string;
 }
 
 /** An object that represents a number of any kind. All JavaScript numbers are 64-bit floating-point numbers. */
