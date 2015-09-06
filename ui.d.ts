@@ -46,19 +46,9 @@ declare class ScriptUI {
 	static newImage(normal: string, disabled: string, pressed: string, rollover: string): ScriptUIImage;
 }
 
-declare module ScriptUIGraphics {
-	export enum BrushType {
-		SOLID_COLOR,
-		THEME_COLOR
-	}
-	
-	export enum PenType {
-		SOLID_COLOR,
-		THEME_COLOR
-	}
-}
-
 declare class ScriptUIGraphics {
+	BrushType: {SOLID_COLOR: number; THEME_COLOR: number;};
+	PenType: {SOLID_COLOR: number; THEME_COLOR: number;};
 	backgroundColor: ScriptUIBrush;
 	currentPath: ScriptUIPath;
 	currentPoint: Point;
@@ -77,9 +67,9 @@ declare class ScriptUIGraphics {
 	lineto(x: number, y: number): Point;
 	measureString(text: string, font: ScriptUIFont, boundingWidth?: number): Dimension;
 	moveto(x: number, y: number): Point;
-	newBrush(type: ScriptUIGraphics.BrushType, color: [number, number, number, number] | string): ScriptUIBrush;
+	newBrush(brushType: number, color: [number, number, number, number] | string): ScriptUIBrush;
 	newPath(): ScriptUIPath;
-	newPen(type: ScriptUIGraphics.PenType, color: [number, number, number, number] | string, lineWidth: number): ScriptUIPen;
+	newPen(penType: number, color: [number, number, number, number] | string, lineWidth: number): ScriptUIPen;
 	rectPath(left: number, top: number, width?: number, height?: number): Point;
 	strokePath(pen: ScriptUIPen): void;
 }
@@ -87,7 +77,7 @@ declare class ScriptUIGraphics {
 declare class ScriptUIBrush {
 	color: [number, number, number, number];
 	theme: string;
-	type: ScriptUIGraphics.BrushType;
+	type: number;
 }
 
 declare class ScriptUIFont {
@@ -111,7 +101,7 @@ declare class ScriptUIPen {
 	color: [number, number, number, number];
 	lineWidth: number;
 	theme: string;
-	type: ScriptUIGraphics.PenType;
+	type: number;
 }
 
 declare class DrawState {
@@ -200,7 +190,7 @@ declare class _WindowOrContainer {
 	helpTip: string;
 	layout: AutoLayoutManager;
 	location: Point;
-	margins: Margins;
+	margins: Margins|number;
 	maximumSize: Dimension;
 	minimumSize: Dimension;
 	orientation: string;
