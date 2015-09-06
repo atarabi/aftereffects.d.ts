@@ -43,7 +43,7 @@ declare class Application {
 	settings: Settings;
 	
 	/** A callback function that is called when an error occurs in the application. */
-	onError: string | void;
+	onError: string;
 	
 	/** A numeric status code used when executing a script
 		externally (that is, from a command line or AppleScript).
@@ -67,10 +67,10 @@ declare class Application {
 	activeViewer: Viewer;
 	
 	/** Creates a new project in After Effects. */
-	newProject(): Project | void;
+	newProject(): Project;
 	
 	/** Opens a project or an Open Project dialog box. */
-	open(file?: File): Project | void;
+	open(file?: File): Project;
 	
 	/** Quits the application. */
 	quit(): void;
@@ -332,7 +332,7 @@ declare class CompItem extends AVItem {
 	bgColor: [number, number, number];
 	
 	/** The current active camera layer. */
-	activeCamera: CameraLayer | void;
+	activeCamera: CameraLayer;
 	
 	/** Changes the display of the start time in the Timeline panel. */
 	displayStartTime: number;
@@ -548,7 +548,7 @@ declare class Layer {
 	name: string;
 		
 	/** The parent of this layer. */
-	parent: Layer | void;
+	parent: Layer;
 	
 	/** The current time of the layer. */
 	time: number;
@@ -635,7 +635,7 @@ declare class Layer {
 	selected: boolean;
 	numProperties: number;
 	
-	propertyGroup(countUp?: number): PropertyGroup | void;
+	propertyGroup(countUp?: number): PropertyGroup;
 	property(index: number): PropertyBase;
 	property(name: string): PropertyBase;
 }
@@ -788,7 +788,7 @@ declare class Project {
 	items: ItemCollection;
 	
 	/** The currently active item. */
-	activeItem: Item | void;
+	activeItem: Item;
 	
 	/** The color depth of the current project. */
 	bitsPerChannel: number;
@@ -1086,7 +1086,7 @@ declare class PropertyBase {
 	selected: boolean;
 	
 	/** Gets the parent group for this property. */
-	propertyGroup(countUp?: number): PropertyGroup | void;
+	propertyGroup(countUp?: number): PropertyGroup;
 	
 	/** Removes this from the project. */
 	remove(): void;
@@ -1177,7 +1177,7 @@ declare class RenderQueueItem {
 	status: RQItemStatus;
 	
 	/** A callback function that is called during the rendering process when the status of the item changes. */
-	onStatusChanged: string | void;
+	onStatusChanged: string;
 	
 	/** A log type for this item. */
 	logType: LogType;
