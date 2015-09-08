@@ -4,8 +4,8 @@
 /// <reference path="./ae.constants.d.ts" />
 /// <reference path="./ae.types.d.ts" />
 
-declare var alert: (object: any) => void;
-declare var confirm: (message: string) => boolean;
-declare var prompt: (text: string, value: string) => string;
+declare var alert: (message?, title?, errorIcon?) => void;
+declare var confirm: (message?, noAsDefault?, title?) => boolean;
+declare var prompt: (prompt?, defaultText?, title?) => string;
 declare var app: Application;
 declare var system: System;
