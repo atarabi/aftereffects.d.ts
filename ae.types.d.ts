@@ -652,10 +652,10 @@ declare class LayerCollection extends Collection {
 	addSolid(color: [number, number, number], name: string, width: number, height: number, pixelAspect: number, duration?: number): AVLayer;
 	
 	/** Creates a new point text layer and adds it to this collection. */
-	addText(sourceText: string | TextDocument): TextLayer;
+	addText(sourceText?: string | TextDocument): TextLayer;
 	
 	/** Creates a new paragraph (box) text layer and adds it to this collection. */
-	addBoxText(size: [number, number], sourceText: string | TextDocument): TextLayer;
+	addBoxText(size: [number, number], sourceText?: string | TextDocument): TextLayer;
 	
 	/** Creates a new camera layer and adds it to this collection. */
 	addCamera(name: string, centerPoint: [number, number]): CameraLayer;
