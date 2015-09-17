@@ -1,3 +1,270 @@
+declare const enum CommandID {
+    /*
+    * File
+    */
+    NewProject = 2,
+    NewFolder = 2139,
+    NewAdobePhotoshopFile = 3147,
+    NewMAXONCINEMA4DFile = 4007,
+    OpenProject = 3,
+    OpenRecentProject1 = 2330,
+    OpenRecentProject2 = 2331,
+    OpenRecentProject3 = 2332,
+    OpenRecentProject4 = 2333,
+    OpenRecentProject5 = 2334,
+    BrowseInBridge = 3689,
+    
+    Close = 4,
+    CloseProject = 3154,
+    Save = 5,
+    SaveAs = 6,
+    SaveAsACopy = 2166,
+    SaveACopyAsXML = 3785,
+    IncrementAndSave = 3088,
+    Revert = 7,
+    
+    ImportFile = 2003,
+    ImportMultipleFiles = 2236,
+    ImportPlaceholder = 2126,
+    ImportSolid = 3000,
+    ImportRecentFootage1 = 2310,
+    ImportRecentFootage2 = 2311,
+    ImportRecentFootage3 = 2312,
+    ImportRecentFootage4 = 2313,
+    ImportRecentFootage5 = 2314,
+    ImportRecentFootage6 = 2315,
+    ImportRecentFootage7 = 2316,
+    ImportRecentFootage8 = 2317,
+    ImportRecentFootage9 = 2318,
+    ImportRecentFootage10 = 2319,
+    ExportAddToAdobeMediaEncoderQueue = 3800,
+    ExportAddToRenderQueue = 2161,
+    
+    AddFootageToComp = 2005,
+    NewCompFromSelection = 2796,
+    
+    CollectFiles = 2482,
+    ConsolidateAllFootage = 2107,
+    RemoveUnsedFootage = 2109,
+    ReduceProject = 2735,
+    FindMissingEffects = 4002,
+    FindMissingFonts = 4003,
+    FindMissingFootage = 4004,
+    WatchFolder = 2457,
+    
+    RunScriptFile = 8000,
+    OpenScriptEditor = 8001,
+    
+    CreateProxyStill = 2778,
+    CreateProxyMovie = 2779,
+    SetProxyFile = 2003,
+    SetProxyNone = 2119,
+    InterpretFootageMain = 2077,
+    InterpretFootageProxy = 2103,
+    InterpretFootageRememberInterpretation = 2254,
+    InterpretFootageApplyInterpretation = 2255,
+    ReplaceFootageFile = 2003,
+    ReplaceFootageWithLayeredComp = 3070,
+    ReplaceFootagePlaceholder = 2126,
+    ReplaceFootageSolid = 3000,
+    ReloadFootage = 2257,
+    RevealInExploler = 2562,
+    RevealInFinder = 2562,
+    RevealInBridge = 3690,
+    
+    ProjectSettings = 2611,
+    
+    /*
+    * Edit
+    */
+    Undo = 16,
+    Redo = 17,
+    
+    Cut = 18,
+    Copy = 19,
+    CopyWithPropertyLinks = 10310,
+    CopyExpressionOnly = 53,
+    Paste = 20,
+    Clear = 21,
+    
+    Duplicate = 2080,
+    SplitLayer = 2158,
+    LiftWorkArea = 2613,
+    ExtractWorkArea = 2614,
+    SelectAll = 23,
+    DeselectAll = 2004,
+    
+    PurgeAllMemoryAndDiskCache = 10200,
+    PurgeAllMemory = 2373,
+    PurgeUndo = 2371,
+    PurgeImageCacheMemory = 2372,
+    PurgeSnapshot = 2481,
+    
+    EditOriginal = 2142,
+    EditInAdobeAudition = 3697,
+    
+    TemplatesRenderSettings = 2149,
+    TemplatesOutputModule = 2150,
+    PasteMochaMask = 5006,
+    
+    /*
+    * Composition
+    */
+    NewComposition = 2000,
+    
+    CompositionSettings = 2007,
+    SetPosterTime = 2012,
+    TrimCompToWorkArea = 2360,
+    CropCompToRegionOfInterest = 2997,
+    AddToAdobeMediaEncoderQueue = 3800,
+    AddToRenderQueue = 2161,
+    AddOutputModule = 2154,
+    
+    SaveFrameAs = 2233,
+    SaveFrameAsPhotoshopLayers = 5001,
+    PreRender = 2780,
+    
+    CompositionFlowchart = 2258,
+    CompositionMiniFlowchart = 3792,
+    
+    /*
+    * Layer
+    */
+    NewText = 7058,
+    NewSolid = 3000,
+    NewLight = 2563,
+    NewCamera = 2564,
+    NewNullObject = 2767,
+    NewShapeLayer = 3736,
+    NewAdjustmentLayer = 2279,
+    //NewAdobePhotoshopFile = 3147,
+    //NewMAXONCINEMA4DFile = 4007,
+    LayerSettings = 2021,
+    
+    OpenLayer = 3784,
+    OpenLayerSource = 2523,
+    //RevealInExploler = 2562,
+    //RevealInFinder = 2562,
+    
+    NewMask = 2367,
+    ResetMask = 2448,
+    RemoveMask = 2368,
+    RemoveAllMasks = 2369,
+    UnlockAllMasks = 2456,
+    LockOtherMasks = 2455,
+    HideLockedMasks = 2524,
+    
+    QualityBest = 2045,
+    QualityDraft = 2044,
+    QualityWireframe = 2042,
+    QualityBilinear = 10207,
+    QualityBicubic = 10208,
+    
+    HideOtherVideo = 2054,
+    ShowAllVideo = 2055,
+    UnlockAllLayers = 2244,
+    
+    FlipHorizontal = 3766,
+    FlipVertical = 3767,
+    CenterInView = 3819,
+    CenterAnchorPointInLayerContent = 10312,
+    FitToComp = 2156,
+    FitToCompWidth = 2732,
+    FitToCompHeight = 2733,
+    EnableTimeRemapping = 2153,
+    TimeReverseLayer = 2135,
+    TimeStretch = 2024,
+    FreezeFrame = 3695,
+    AddMarker = 2158,
+    
+    LayerStylesConvertToEditableStyles = 3740,
+    LayerStylesShowAll = 3743,
+    LayerStylesRemoveAll = 2072,
+    LayerStylesDropShadow = 9000,
+    LayerStylesInnerShadow = 9001,
+    LayerStylesOuterGlow = 9002,
+    LayerStylesInnerGlow = 9003,
+    LayerStylesBevelAndEmboss = 9004,
+    LayerStylesStain = 9005,
+    LayerStylesColorOverlay = 9006,
+    LayerStylesGradientOverlay = 9007,
+    LayerStylesStroke = 9008,
+    
+    GroupShapes = 3741,
+    UngroupShapes = 3742,
+    
+    ConvertToEditableText = 3799,
+    CreateShapesFromText = 3781,
+    CreateMasksFromText = 2933,
+    CreateShapesFromVectorLayer = 3973,
+    CreateStereo3DRig = 3843,
+    CreateOrbitNull = 3844,
+    LinkFocusDistanceToPointOfInterest = 3845,
+    LinkFocusDistanceToLayer = 3847,
+    SetFocusDitanceToLayer = 3846,
+    AutoTrace = 3044,
+    PreCompose = 2071,
+    
+    /*
+    * Animation
+    */
+    SaveAnimationPreset = 3075,
+    ApplyAnimationPreset = 2450,
+    RecentAnimationPreset1 = 2460,
+    RecentAnimationPreset2 = 2461,
+    RecentAnimationPreset3 = 2462,
+    RecentAnimationPreset4 = 2463,
+    RecentAnimationPreset5 = 2464,
+    BrowsePresets = 3691,
+    
+    ConvertAudioToKeyframes = 5015,
+    ConvertExpressionToKeyframes = 2639,
+    RPFCameraImport = 5018,
+    SequenceLayers = 5003,
+    TimeReverseKeyframes = 3693,
+    
+    RemoveAllTextAnimators = 3058,
+    
+    AddExpression = 2702,
+    SeparateDimensions = 3764,
+    TrackCamera = 3983,
+    TrackInMochaAE = 5007,
+    WarpStabilizerVFX = 3986,
+    TrackMotion = 2568,
+    TrackMask = 10311,
+    TrackThisProperty = 2643,
+    
+    RevealPropertiesWithKeyframes = 2387,
+    RevealPropertiesWithAnimation = 4011,
+    RevealAllModifiedProperties = 2771,
+    
+    /*
+    * View
+    */
+    ZoomIn = 2092,
+    ZoomOut = 2093,
+    
+    ResolutionFull = 2048,
+    ResolutionHalf = 2047,
+    ResolutionThird = 2081,
+    ResolutionQuarter = 2046,
+    ResolutionCustom = 2049,
+    
+    UseDisplayColorManagement = 3704,
+    
+    ShowRulers = 2280,
+    
+    ShowGuides = 2274,
+    SnapToGuides = 2286,
+    LockGuides = 2275,
+    ClearGuides = 2276,
+    
+    ShowGrid = 2277,
+    SnapToGrid = 2278,
+    
+    ShowLayerControls = 2435,
+}
+
 declare enum PurgeTarget {
     /** Purges all data that After Effects has cached to physical memory. */
     ALL_CACHES, 
@@ -148,7 +415,7 @@ declare enum MaskMotionBlur {
 
 declare enum MaskFeatherFalloff {
     FFO_LINEAR,
-    FFO_SMOOTH  
+    FFO_SMOOTH
 }
 
 declare enum PostRenderAction {
@@ -158,7 +425,7 @@ declare enum PostRenderAction {
     SET_PROXY
 }
 
-declare enum GetSettingsFormat{
+declare enum GetSettingsFormat {
     STRING,
     STRING_SETTABLE,
     NUMBER,
