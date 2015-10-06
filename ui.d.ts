@@ -234,6 +234,15 @@ declare class _WindowOrContainer {
 	show(): any;
 	
 	onDraw: Function;
+	onActivate: Function;
+	onClose: Function;
+	onDeactivate: Function;
+	onMove: Function;
+	onMoving: Function;
+	onResize: Function;
+	onResizing: Function;
+	onShortcutKey: Function;
+	onShow: Function;
 }
 
 declare class Window extends _WindowOrContainer{
@@ -271,16 +280,6 @@ declare class Window extends _WindowOrContainer{
 	center(window?: Window): void;
 	close(result?: number): void;
 	update(): void;
-
-	onActivate: Function;
-	onClose: Function;
-	onDeactivate: Function;
-	onMove: Function;
-	onMoving: Function;
-	onResize: Function;
-	onResizing: Function;
-	onShortcutKey: Function;
-	onShow: Function;
 }
 
 declare class _Container extends _WindowOrContainer {
@@ -313,6 +312,9 @@ declare class __Control {
 	show(): any;
 	
 	onDraw: Function;
+	onEnterKey: Function;
+	onActivate: Function;
+	onDeactivate: Function;
 }
 
 declare class _Control extends __Control {
