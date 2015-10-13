@@ -694,7 +694,7 @@ declare class Folder {
     /*
      * The full path name for the referenced folder in URI notation. Read only.
      */
-    absoluteURI: String
+    absoluteURI: string
 
     /*
      * When true, the object refers to a file system alias or shortcut. Read
