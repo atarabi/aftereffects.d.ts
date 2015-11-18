@@ -1,3 +1,14 @@
+declare const enum AppVersion {
+  CS3 = 8.0,
+  CS4 = 9.0,
+  CS5 = 10.0,
+  CS5_5 = 10.5,
+  CS6 = 11.0,
+  CC = 12.0,
+  CC2014 = 13.0,
+  CC2015 = 13.5
+}
+
 declare const enum CommandID {
     /*
     * File
@@ -175,7 +186,7 @@ declare const enum CommandID {
     TimeReverseLayer = 2135,
     TimeStretch = 2024,
     FreezeFrame = 3695,
-    AddMarker = 2158,
+    AddMarker = 2157,
     
     LayerStylesConvertToEditableStyles = 3740,
     LayerStylesShowAll = 3743,
