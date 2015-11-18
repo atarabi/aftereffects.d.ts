@@ -426,6 +426,8 @@ declare class FootageItem extends AVItem {
 	/** Opens the footage in a Footage panel. */
 	openInViewer(): Viewer;
 } 
+
+declare class PlaceholderItem extends FootageItem {}
  
 /** The FootageSource object holds information describing the source of some footage. It is used as the mainSource of a FootageItem, or the proxySource of a CompItem or FootageItem. */
 declare class FootageSource {
@@ -851,7 +853,7 @@ declare class Project {
 	saveWithDialog(): boolean;
 	
 	/** Imports a placeholder into the project. */
-	importPlaceholder(name: string, width: number, height: number, frameRate: number, duration: number): PlaceholderSource;
+	importPlaceholder(name: string, width: number, height: number, frameRate: number, duration: number): PlaceholderItem;
 	
 	/** Imports a file into the project. */
 	importFile(importOptions: ImportOptions): FootageItem;
