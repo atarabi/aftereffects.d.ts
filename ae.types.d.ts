@@ -768,7 +768,7 @@ declare class OutputModule {
 	
 	getSetting(key: string): string | number;
 	
-	getSettings(format: GetSettingsFormat): Object;
+	getSettings(format?: GetSettingsFormat): Object;
 	
 	setSetting(key: string, value: string | number): void;
 	
