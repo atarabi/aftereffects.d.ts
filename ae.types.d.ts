@@ -768,7 +768,33 @@ declare class OutputModule {
 	
 	getSetting(key: string): string | number;
 	
-	getSettings(format?: GetSettingsFormat): Object;
+	getSettings(format?: GetSettingsFormat): {
+    'Audio Bit Depth';
+    'Audio Channels';
+    'Audio Sample Rate';
+    'Channels';
+    'Color';
+    'Crop';
+    'Crop Bottom';
+    'Crop Left';
+    'Crop Right';
+    'Crop Top';
+    'Depth';
+    'Format';
+    'Include Project Link';
+    'Include Source XMP Metadata';
+    'Lock Aspect Ratio';
+    'Output Audio';
+    'Output File Info';
+    'Post-Render Action';
+    'Resize';
+    'Resize Quality';
+    'Resize to';
+    'Starting #';
+    'Use Comp Frame Number';
+    'Use Region of Interest';
+    'Video Output';
+  };
 	
 	setSetting(key: string, value: string | number): void;
 	
