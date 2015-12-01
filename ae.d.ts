@@ -9,3 +9,5 @@ declare var confirm: (message?, noAsDefault?, title?) => boolean;
 declare var prompt: (prompt?, defaultText?, title?) => string;
 declare var app: Application;
 declare var system: System;
+/** CC 2025(13.6)- */
+declare var generateRandomNumber: () => number;

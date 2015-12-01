@@ -1369,7 +1369,10 @@ declare class TextDocument {
 	
 	/** For box text, the pixel dimensions for the text bounds. */
 	boxTextSize: [number, number];
-	
+  
+	/** CC 2025(13.6)- */
+	baselineLocs: number[];
+
 	/** Restores the default character settings in the Character panel. */
 	resetCharStyle(): void;
 	
