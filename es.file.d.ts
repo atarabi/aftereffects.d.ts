@@ -817,7 +817,7 @@ declare class Folder {
      *
      * TODO: return `(File|Folder)[]` in TSC 1.4
      */
-    getFiles(mask?: string): any[]
+    getFiles(mask?: string): (File|Folder)[]
 
     /*
      * Retrieves the path for this folder relative to the specified base path or
