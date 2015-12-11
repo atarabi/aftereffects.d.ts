@@ -1124,6 +1124,10 @@ declare class PropertyBase {
 	
   /** Duplicates this property object. */
   duplicate(): PropertyBase;
+  
+  /** Gets a member property or group. Strictly, this should be a PropertyGroup method. */
+  property(index: number): PropertyBase;
+  property(name: string): PropertyBase;
 }
 
 /** The PropertyGroup object represents a group of properties. It can contain Property objects and other PropertyGroup objects. Property groups can be nested to provide a parent-child hierarchy, with a Layer object at the top (root) down to a single Property object, such as the mask feather of the third mask. To traverse the group hierarchy, use PropertyBase methods and attributes. */
@@ -1132,8 +1136,8 @@ declare class PropertyGroup extends PropertyBase {
   numProperties: number;
 	
   /** Gets a member property or group. */
-  property(index: number): PropertyBase;
-  property(name: string): PropertyBase;
+  //property(index: number): PropertyBase;
+  //property(name: string): PropertyBase;
 	
   /** Reports whether a property can be added to the group. */
   canAddProperty(name: string): boolean;
