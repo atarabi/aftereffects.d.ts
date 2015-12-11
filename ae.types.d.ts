@@ -282,10 +282,22 @@ declare class AVLayer extends Layer {
 	
   /** Opens the layer in a Layer panel. */
   openInViewer(): void;
+  
+  //Shortcuts
+  timeRemap: Property;
+  mask: PropertyGroup;
+  effect: PropertyGroup;
+  layerStyle: _LayerStyles;
+  geometryOption: _GeometryOptionsGroup;
+  materialOption: _MaterialOptionsGroup;
+  audio: _AudioGroup;
 }
 
 /** The CameraLayer object represents a camera layer within a composition. Create it using the LayerCollection object’s addCamera method */
-declare class CameraLayer extends Layer { }
+declare class CameraLayer extends Layer {
+  //Shortcuts
+  cameraOption: _CameraOptionsGroup;
+}
 
 /** Like an array, a collection associates a set of objects or values as a logical group and provides access to them by index. However, most collection objects are read-only. You do not assign objects to them yourself—their contents update automatically as objects are created or deleted. */
 declare class Collection {
@@ -630,7 +642,7 @@ declare class Layer {
   /** Applies a named collection of animation settings to the layer. */
   applyPreset(presetName: File): void;
 	
-  //From Property
+  //From PropertyGroup
   matchName: string;
   propertyDepth: number;
   propertyType: PropertyType;
@@ -640,6 +652,10 @@ declare class Layer {
   propertyGroup(countUp?: number): PropertyGroup;
   property(index: number): PropertyBase;
   property(name: string): PropertyBase;
+  
+  //Shortcuts
+  marker: Property;
+  transform: _TransformGroup;
 }
 
 /** The LayerCollection object represents a set of layers. The LayerCollection belonging to a CompItem object contains all the layer objects for layers in the composition. The methods of the collection object allow you to manipulate the layer list. */
@@ -679,6 +695,9 @@ declare class LayerCollection extends Collection {
 declare class LightLayer extends Layer {
   /** For light layers, the type of light. */
   lightType: LightType;
+  
+  //Shortcuts
+  lightOption: _LightOptionsGroup;
 }
 
 /** The MarkerValue object represents a layer marker, which associates a comment, and optionally a chapter reference point, Web-page link, or Flash Video cue point with a particular point in a layer. */
@@ -894,7 +913,7 @@ declare class Project {
   autoFixExpressions(oldText: string, newText: string): void;
 }
 
-declare type PropertyValue = void | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
+declare type PropertyValue = void | boolean | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
 
 /** The Property object contains value, keyframe, and expression information about a particular AE property of a layer. */
 declare class Property extends PropertyBase {
@@ -1125,13 +1144,13 @@ declare class PropertyBase {
   /** Duplicates this property object. */
   duplicate(): PropertyBase;
   
-  /** Gets a member property or group. Strictly, this should be a PropertyGroup method. */
+  /** Gets a member property or group. Strictly, this should be PropertyGroup method. */
   property(index: number): PropertyBase;
   property(name: string): PropertyBase;
 }
 
 /** The PropertyGroup object represents a group of properties. It can contain Property objects and other PropertyGroup objects. Property groups can be nested to provide a parent-child hierarchy, with a Layer object at the top (root) down to a single Property object, such as the mask feather of the third mask. To traverse the group hierarchy, use PropertyBase methods and attributes. */
-declare class PropertyGroup extends PropertyBase {
+declare class PropertyGroup extends PropertyBase {  
   /** The number of indexed properties in the group. */
   numProperties: number;
 	
@@ -1385,7 +1404,9 @@ declare class TextDocument {
 }
 
 /** The TextLayer object represents a text layer within a composition. Create it using the LayerCollection object’s addText method. */
-declare class TextLayer extends AVLayer { }
+declare class TextLayer extends AVLayer {
+  text: _TextProperties;
+}
 
 /** The Viewer object represents a Composition, Layer, or Footage panel. */
 declare class Viewer {
@@ -1416,4 +1437,239 @@ declare class View {
 
 declare class ViewOptions {
   fastPreview: FastPreviewType;
+}
+
+/*
+* Properties for Shortcuts
+*/
+declare class _TransformGroup extends PropertyGroup {
+  anchorPoint: Property;
+  position: Property;
+  xPosition: Property;
+  yPosition: Property;
+  zPosition: Property;
+  scale: Property;
+  orientation: Property;
+  xRotation: Property;
+  yRotation: Property;
+  zRotation: Property;
+  opacity: Property;
+}
+
+declare class _LightOptionsGroup extends PropertyGroup {
+  intensity: Property;
+  color: Property;
+  coneAngle: Property;
+  coneFeather: Property;
+  falloff: Property;
+  radius: Property;
+  falloffDistance: Property;
+  castsShadows: Property;
+  shadowDarkness: Property;
+  shadowDiffusion: Property;
+}
+
+declare class _CameraOptionsGroup extends PropertyGroup {
+  zoom: Property;
+  depthOfField: Property;
+  focusDistance: Property;
+  aperture: Property;
+  blurLevel: Property;
+  irisShape: Property;
+  irisRotation: Property;
+  irisRoundness: Property;
+  irisAspectRatio: Property;
+  irisDiffractionFringe: Property;
+  highlightGain: Property;
+  highlightThreshold: Property;
+  highlightSaturation: Property;
+}
+
+declare class _LayerStyles extends PropertyGroup {
+  blendingOption: _BlendOptionsGroup;
+  dropShadow: _DropShadow;
+  innerShadow: _InnerShadow;
+  outerGlow: _OuterGlow;
+  innerGlow: _InnerGlow;
+  bevelAndEmboss: _BevelAndEmboss;
+  satin: _Satin;
+  colorOverlay: _ColorOverlay;
+  gradientOverlay: _GradientOverlay;
+  stroke: _Stroke;
+}
+
+declare class _BlendOptionsGroup extends PropertyGroup {
+  globalLightAngle: Property;
+  globalLightAltitude: Property;
+  advancedBlending: _AdvBlendGroup;
+}
+
+declare class _AdvBlendGroup extends PropertyGroup {
+  fillOpacity: Property;
+  red: Property;
+  green: Property;
+  blue: Property;
+  blendInteriorStylesAsGroup: Property;
+  useBlendRangesFromSource: Property;
+}
+
+declare class _DropShadow extends PropertyGroup {
+  blendMode: Property;
+  color: Property;
+  opacity: Property;
+  useGlobalLight: Property;
+  angle: Property;
+  distance: Property;
+  spread: Property;
+  size: Property;
+  noise: Property;
+  layerKnocksOutDropShadow: Property;
+}
+
+declare class _InnerShadow extends PropertyGroup {
+  blendMode: Property;
+  color: Property;
+  opacity: Property;
+  useGlobalLight: Property;
+  angle: Property;
+  distance: Property;
+  choke: Property;
+  size: Property;
+  noise: Property;
+}
+
+declare class _OuterGlow extends PropertyGroup {
+  blendMode: Property;
+  opacity: Property;
+  noise: Property;
+  colorType: Property;
+  color: Property;
+  clors: Property;
+  gradientSmoothness: Property;
+  technique: Property;
+  spread: Property;
+  size: Property;
+  range: Property;
+  jitter: Property;
+}
+
+declare class _InnerGlow extends PropertyGroup {
+  blendMode: Property;
+  opacity: Property;
+  noise: Property;
+  colorType: Property;
+  color: Property;
+  clors: Property;
+  gradientSmoothness: Property;
+  technique: Property;
+  source: Property;
+  choke: Property;
+  size: Property;
+  range: Property;
+  jitter: Property;
+}
+
+declare class _BevelAndEmboss extends PropertyGroup {
+  style: Property;
+  technique: Property;
+  depth: Property;
+  direction: Property;
+  size: Property;
+  soften: Property;
+  useGlobalLight: Property;
+  angle: Property;
+  altitude: Property;
+  highlightMode: Property;
+  highlightColor: Property;
+  highlightOpacity: Property;
+  shadowMode: Property;
+  shadowColor: Property;
+  shadowOpacity: Property;
+}
+
+declare class _Satin extends PropertyGroup {
+  blendMode: Property;
+  color: Property;
+  opacity: Property;
+  angle: Property;
+  distance: Property;
+  size: Property;
+  invert: Property;
+}
+
+declare class _ColorOverlay extends PropertyGroup {
+  blendMode: Property;
+  color: Property;
+  opacity: Property;
+}
+
+declare class _GradientOverlay extends PropertyGroup {
+  blendMode: Property;
+  opacity: Property;
+  colors: Property;
+  gradientSmoothness: Property;
+  angle: Property;
+  style: Property;
+  reverse: Property;
+  alignWithLayer: Property;
+  scale: Property;
+  offset: Property;
+}
+
+declare class _Stroke extends PropertyGroup {
+  color: Property;
+  blendMode: Property;
+  size: Property;
+  opacity: Property;
+  position: Property;
+}
+
+declare class _GeometryOptionsGroup extends PropertyGroup {
+  curvature: Property;
+  segments: Property;
+  
+  bevelStyle: Property;
+  bevelDepth: Property;
+  holeBevelDepth: Property;
+  extrusionDepth: Property;
+}
+
+declare class _MaterialOptionsGroup extends PropertyGroup {
+  castsShadows: Property;
+  lightTransmission: Property;
+  acceptsShadows: Property;
+  acceptsLights: Property;
+  appearsInReflections: Property;
+  ambient: Property;
+  diffuse: Property;
+  specularIntensity: Property;
+  specularShininess: Property;
+  metal: Property;
+  reflectionIntensity: Property;
+  reflectionSharpness: Property;
+  reflectionRolloff: Property;
+  transparency: Property;
+  transparencyRolloff: Property;
+  indexOfRefraction: Property;
+}
+
+declare class _AudioGroup extends PropertyGroup {
+  audioLevels: Property;
+}
+
+declare class _TextProperties extends PropertyGroup {
+  sourceText: Property;
+  pathOption: _TextPathOptions;
+  moreOption: _TextMoreOptions;
+}
+
+declare class _TextPathOptions extends PropertyGroup {
+  path: Property;
+}
+
+declare class _TextMoreOptions extends PropertyGroup {
+  anchorPointGrouping: Property;
+  groupingAlignment: Property;
+  fillANdStroke: Property;
+  interCharacterBlending: Property;
 }
