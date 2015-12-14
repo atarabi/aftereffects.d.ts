@@ -166,8 +166,13 @@ declare class MouseEvent extends UIEvent {
 	initMouseEvent (eventName: string, bubble: boolean, isCancelable: boolean, view: any, detail: number, screenX: number, screenY: number, clientX: number, clientY: number, ctrlKey: boolean, altKey: boolean, shiftKey: boolean, metaKey: boolean, button: number, relatedTarget?: any): void;
 }
 
-declare class AutoLayoutManager {
+declare interface _LayoutManager {
 	layout(recalculate?: boolean): void;
+	resize(): void;
+}
+
+declare class AutoLayoutManager implements _LayoutManager {
+  layout(recalculate?: boolean): void;
 	resize(): void;
 }
 
@@ -184,17 +189,17 @@ declare class _WindowOrContainer {
 	alignChildren: string | [string, string];
 	alignment: string | [string, string];
 	bounds: Bounds;
-	children: any[];
+	children: (_Container|_Control)[];
 	enabled: boolean;
 	graphics: ScriptUIGraphics;
 	helpTip: string;
-	layout: AutoLayoutManager;
+	layout: _LayoutManager;
 	location: Point;
 	margins: Margins|number;
 	maximumSize: Dimension;
 	minimumSize: Dimension;
 	orientation: string;
-	parent: any;
+	parent: _WindowOrContainer;
 	preferredSize: Dimension;
 	properties: any;
 	size: Dimension;
