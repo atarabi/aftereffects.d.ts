@@ -65,6 +65,9 @@ declare class Application {
 	
   /** The currently focused or last-focused viewer panel. */
   activeViewer: Viewer;
+  
+  // Preferences
+  preferences: Preferences;
 	
   /** Creates a new project in After Effects. */
   newProject(): Project;
@@ -120,6 +123,21 @@ declare class Application {
   findMenuCommandId(str: string): number;
 
   executeCommand(id: number): void;
+}
+
+declare class Preferences {
+  deletePref(section: string, key: string, type?: PREFType): void;
+  getPrefAsBool(section: string, key: string, type?: PREFType): boolean;
+  getPrefAsFloat(section: string, key: string, type?: PREFType): number;
+  getPrefAsLong(section: string, key: string, type?: PREFType): number;
+  getPrefAsString(section: string, key: string, type?: PREFType): string;
+  havePref(section: string, key: string, index?: number, type?: PREFType): boolean;
+  reload(): void;
+  savePrefAsBool(section: string, key: string, value: boolean, type?: PREFType): void;
+  savePrefAsFloat(section: string, key: string, value: number, type?: PREFType): void;
+  savePrefAsLong(section: string, key: string, value: number, type?: PREFType): void;
+  savePrefAsString(section: string, key: string, value: string, type?: PREFType): void;
+  saveToDisk(): void;
 }
 
 /** The AVItem object provides access to attributes and methods of audio/visual files imported into After Effects. */
@@ -1627,7 +1645,7 @@ declare class _Stroke extends PropertyGroup {
 declare class _GeometryOptionsGroup extends PropertyGroup {
   curvature: Property;
   segments: Property;
-  
+
   bevelStyle: Property;
   bevelDepth: Property;
   holeBevelDepth: Property;
