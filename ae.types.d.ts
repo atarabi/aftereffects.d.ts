@@ -299,7 +299,7 @@ declare class AVLayer extends Layer {
   sourceRectAtTime(timeT: number, extents: boolean): { top: number; left: number; width: number; height: number; };
 	
   /** Opens the layer in a Layer panel. */
-  openInViewer(): void;
+  openInViewer(): Viewer;
   
   //Shortcuts
   timeRemap: Property;
