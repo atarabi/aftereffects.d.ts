@@ -419,6 +419,7 @@ declare class IconButton extends _Control {
 	icon: string | File;
 	image: ScriptUI | string | File;
 	shortcutKey: string;
+	text: string;
 	title: string;
 	titleLayout: _TitleLayout;
 	
