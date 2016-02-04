@@ -39,6 +39,9 @@ declare class Application {
   /** When true, the local After Effects application is running as a render engine. */
   isRenderEngine: boolean;
 	
+  /** The language After Effects is running. */
+  language: Language;
+	
   /** Application settings that can be set via scripting. */
   settings: Settings;
 	

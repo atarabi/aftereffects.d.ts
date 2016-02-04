@@ -276,6 +276,15 @@ declare const enum CommandID {
     ShowLayerControls = 2435,
 }
 
+declare enum Language {
+    ENGLISH = 1612,
+    JAPANESE = 1613,
+    GERMAN = 1614,
+    FRENCH = 1615,
+    ITALIAN = 1616,
+    SPANISH = 1617
+}
+
 declare enum PurgeTarget {
     /** Purges all data that After Effects has cached to physical memory. */
     ALL_CACHES, 
