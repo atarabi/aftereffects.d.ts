@@ -410,6 +410,9 @@ declare class CompItem extends AVItem {
 	
   /** Opens the composition in a Composition panel. */
   openInViewer(): Viewer;
+  
+  /** Save the specific frame to a png file */
+  saveFrameToPng(time: number, file: File);
 }
 
 /** The FileSource object describes footage that comes from a file. */
