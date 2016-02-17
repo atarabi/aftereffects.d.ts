@@ -1471,6 +1471,7 @@ declare class _TransformGroup extends PropertyGroup {
   zPosition: Property;
   scale: Property;
   orientation: Property;
+  rotation: Property;
   xRotation: Property;
   yRotation: Property;
   zRotation: Property;
