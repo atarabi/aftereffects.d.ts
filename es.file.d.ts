@@ -877,5 +877,5 @@ declare class Folder {
      *
      * TODO: return `(File|Folder)` in TSC 1.4
      */
-    selectDlg(prompt_: string): any
+    selectDlg(prompt_: string): File|Folder
 }
