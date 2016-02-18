@@ -265,7 +265,7 @@ declare class File {
      *
      * @return true on success.
      */
-    changePath(path: string): string
+    changePath(path: string): boolean
 
     /*
      * Closes this open file.
