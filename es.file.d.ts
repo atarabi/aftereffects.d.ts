@@ -95,7 +95,7 @@ declare class File {
      *
      * TODO: return `(File|File[])` in TSC 1.4
      */
-    static openDialog(prompt_?: string, filter?: string, multiSelect?: boolean): any
+    static openDialog(prompt_?: string, filter?: string, multiSelect?: boolean): File|File[]
 
     /*
      * Opens the built-in platform-specific file-browsing dialog in which a user
