@@ -689,7 +689,7 @@ declare class Folder {
      *
      * TODO: return `(File|Folder)` in TSC 1.4
      */
-    static selectDialog(prompt?: string): any
+    static selectDialog(prompt?: string): File|Folder
 
     /*
      * The full path name for the referenced folder in URI notation. Read only.
