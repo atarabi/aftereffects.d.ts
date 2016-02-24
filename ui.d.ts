@@ -200,7 +200,7 @@ declare class _WindowOrContainer {
 	margins: Margins|number;
 	maximumSize: Dimension;
 	minimumSize: Dimension;
-	orientation: string;
+	orientation: 'row' | 'column' | 'stack';
 	parent: _WindowOrContainer;
 	preferredSize: Dimension;
 	properties: any;
