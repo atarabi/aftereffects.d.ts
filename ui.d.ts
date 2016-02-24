@@ -6,6 +6,8 @@ declare type Margins = [number, number, number, number];
 
 declare type Point = [number, number];
 
+declare type Alignment = number | 'top' | 'bottom' | 'left' | 'right' | 'fill' | 'center';
+
 declare module ScriptUI {
 	export enum Alignment {
 		TOP,
@@ -177,7 +179,7 @@ declare class AutoLayoutManager implements _LayoutManager {
 }
 
 interface _TitleLayout {
-	alignment: [string, string];
+	alignment: [Alignment, Alignment];
 	characters: number;
 	spacing: number;
 	margins: Margins;
@@ -186,8 +188,8 @@ interface _TitleLayout {
 }
 
 declare class _WindowOrContainer {
-	alignChildren: string | [string, string];
-	alignment: string | [string, string];
+	alignChildren: Alignment | [Alignment, Alignment];
+	alignment: Alignment | [Alignment, Alignment];
 	bounds: Bounds;
 	children: (_Container|_Control)[];
 	enabled: boolean;
@@ -323,7 +325,7 @@ declare class __Control {
 }
 
 declare class _Control extends __Control {
-	alignment: string | [string, string];
+	alignment: Alignment | [Alignment, Alignment];
 	bounds: Bounds;
 	children: any[];
 	enabled: boolean;
