@@ -126,6 +126,11 @@ declare class Application {
   findMenuCommandId(str: string): number;
 
   executeCommand(id: number): void;
+  
+  /** CC2015- */
+  getenv(name: string): string;
+  setTimeout(func: Function, delay?: number): number;
+  cancelTimeout(id: number): void;
 }
 
 declare class Preferences {
