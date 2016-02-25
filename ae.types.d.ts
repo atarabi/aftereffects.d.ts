@@ -1453,14 +1453,17 @@ declare class Viewer {
 
 declare class View {
   active: boolean;
-
   options: ViewOptions;
 
   setActive(): void;
 }
 
 declare class ViewOptions {
+  channels: ChannelType;
+  checkerboards: boolean;
+  exposure: number;
   fastPreview: FastPreviewType;
+  zoom: number;
 }
 
 /*
