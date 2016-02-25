@@ -1569,7 +1569,7 @@ declare class _OuterGlow extends PropertyGroup {
   noise: Property;
   colorType: Property;
   color: Property;
-  clors: Property;
+  colors: Property;
   gradientSmoothness: Property;
   technique: Property;
   spread: Property;
@@ -1584,7 +1584,7 @@ declare class _InnerGlow extends PropertyGroup {
   noise: Property;
   colorType: Property;
   color: Property;
-  clors: Property;
+  colors: Property;
   gradientSmoothness: Property;
   technique: Property;
   source: Property;
