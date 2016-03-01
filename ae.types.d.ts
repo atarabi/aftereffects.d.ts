@@ -309,6 +309,12 @@ declare class AVLayer extends Layer {
   /** Opens the layer in a Layer panel. */
   openInViewer(): Viewer;
   
+  /** CC 2014.2(13.2)- */
+  sourcePointToComp(point: [number, number]): [number, number];
+  
+  /** CC 2014.2(13.2)- */
+  compPointToSource(point: [number, number]): [number, number];
+  
   //Shortcuts
   timeRemap: Property;
   mask: PropertyGroup;
@@ -1422,7 +1428,40 @@ declare class TextDocument {
   /** For box text, the pixel dimensions for the text bounds. */
   boxTextSize: [number, number];
   
-  /** CC 2025(13.6)- */
+  /** CC 2014.2(13.2)- */
+  fauxBold: boolean;
+  
+  /** CC 2014.2(13.2)- */
+  fauxItalic: boolean;
+  
+  /** CC 2014.2(13.2)- */
+  allCaps: boolean;
+  
+  /** CC 2014.2(13.2)- */
+  smallCaps: boolean;
+  
+  /** CC 2014.2(13.2)- */
+  superscript: boolean;
+  
+  /** CC 2014.2(13.2)- */
+  subscript: boolean;
+  
+  /** CC 2014.2(13.2)- */
+  verticalScale: number;
+  
+  /** CC 2014.2(13.2)- */
+  horizontalScale: number;
+  
+  /** CC 2014.2(13.2)- */
+  baselineShift: number;
+  
+  /** CC 2014.2(13.2)- */
+  tsume: number;
+  
+  /** CC 2014.2(13.2)- */
+  boxTextPos: [number, number];
+  
+  /** CC 2015(13.6)- */
   baselineLocs: number[];
 
   /** Restores the default character settings in the Character panel. */
