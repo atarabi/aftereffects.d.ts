@@ -79,18 +79,6 @@ declare function encodeURI(uri: string): string;
   */
 declare function encodeURIComponent(uriComponent: string): string;
 
-interface PropertyDescriptor {
-    configurable?: boolean;
-    enumerable?: boolean;
-    value?: any;
-    writable?: boolean;
-    get? (): any;
-    set? (v: any): void;
-}
-
-interface PropertyDescriptorMap {
-    [s: string]: PropertyDescriptor;
-}
 
 interface Object {
     /** The initial value of Object.prototype.constructor is the standard built-in Object constructor. */
@@ -98,6 +86,9 @@ interface Object {
 
     /** Returns a string representation of an object. */
     toString(): string;
+    
+    /** Creates and returns a string representation of this object.. */
+    toSource(): string;
 
     /** Returns a date converted to a string using the current locale. */
     toLocaleString(): string;
@@ -122,6 +113,12 @@ interface Object {
       * @param v A property name.
       */
     propertyIsEnumerable(v: string): boolean;
+    
+    /** Adds a watch function to a property, which is called when the value changes. */
+    watch(name: string, func: Function);
+    
+    /** Removes the watch function of a property. */
+    unwatch(name: string);
 }
 
 /**
@@ -135,90 +132,14 @@ declare var Object: {
     /** A reference to the prototype for a class of objects. */
     prototype: Object;
 
-    /** 
-      * Returns the prototype of an object. 
-      * @param o The object that references the prototype.
-      */
-    getPrototypeOf(o: any): any;
-
-    /**
-      * Gets the own property descriptor of the specified object. 
-      * An own property descriptor is one that is defined directly on the object and is not inherited from the object's prototype. 
-      * @param o Object that contains the property.
-      * @param p Name of the property.
-    */
-    getOwnPropertyDescriptor(o: any, p: string): PropertyDescriptor;
-
-    /** 
-      * Returns the names of the own properties of an object. The own properties of an object are those that are defined directly 
-      * on that object, and are not inherited from the object's prototype. The properties of an object include both fields (objects) and functions.
-      * @param o Object that contains the own properties.
-      */
-    getOwnPropertyNames(o: any): string[];
-
-    /** 
-      * Creates an object that has the specified prototype, and that optionally contains specified properties.
-      * @param o Object to use as a prototype. May be null
-      * @param properties JavaScript object that contains one or more property descriptors. 
-      */
-    create(o: any, properties?: PropertyDescriptorMap): any;
-
-    /**
-      * Adds a property to an object, or modifies attributes of an existing property. 
-      * @param o Object on which to add or modify the property. This can be a native JavaScript object (that is, a user-defined object or a built in object) or a DOM object.
-      * @param p The property name.
-      * @param attributes Descriptor for the property. It can be for a data property or an accessor property.
-      */
-    defineProperty(o: any, p: string, attributes: PropertyDescriptor): any;
-
-    /**
-      * Adds one or more properties to an object, and/or modifies attributes of existing properties. 
-      * @param o Object on which to add or modify the properties. This can be a native JavaScript object or a DOM object.
-      * @param properties JavaScript object that contains one or more descriptor objects. Each descriptor object describes a data property or an accessor property.
-      */
-    defineProperties(o: any, properties: PropertyDescriptorMap): any;
-
-    /**
-      * Prevents the modification of attributes of existing properties, and prevents the addition of new properties.
-      * @param o Object on which to lock the attributes. 
-      */
-    seal(o: any): any;
-
-    /**
-      * Prevents the modification of existing property attributes and values, and prevents the addition of new properties.
-      * @param o Object on which to lock the attributes.
-      */
-    freeze(o: any): any;
-
-    /**
-      * Prevents the addition of new properties to an object.
-      * @param o Object to make non-extensible. 
-      */
-    preventExtensions(o: any): any;
-
-    /**
-      * Returns true if existing property attributes cannot be modified in an object and new properties cannot be added to the object.
-      * @param o Object to test. 
-      */
-    isSealed(o: any): boolean;
-
-    /**
-      * Returns true if existing property attributes and values cannot be modified in an object, and new properties cannot be added to the object.
-      * @param o Object to test.  
-      */
-    isFrozen(o: any): boolean;
-
-    /**
-      * Returns a value that indicates whether new properties can be added to an object.
-      * @param o Object to test. 
-      */
-    isExtensible(o: any): boolean;
-
     /**
       * Returns the names of the enumerable properties and methods of an object.
       * @param o Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object.
       */
     keys(o: any): string[];
+    
+    /** Reports whether an object is still valid. */
+    isValid(what): boolean;
 }
 
 /**
@@ -246,13 +167,26 @@ interface Function {
       * @param argArray A list of arguments to be passed to the new function.
       */
     bind(thisArg: any, ...argArray: any[]): any;
+    
+    /** Creates a string representation of this object that can be fred back to eval() to re-create an object. Works only with JavaScript functions.*/
+    toSource(): string;
+    
+    /** Returns the function definition as a string. */
+    toString(): string;
 
     prototype: any;
+    
+    /** The function name. */
+    name: string;
+    
+    /** The number of formal arguments. */
+    arity: number;
+    
+    /** The number of formal arguments. */
     length: number;
-
-    // Non-standard extensions
+    
+    /** The function arguments, packed into an array. */
     arguments: any;
-    caller: Function;
 }
 
 declare var Function: {
@@ -274,6 +208,12 @@ interface IArguments {
 interface String {
     /** Returns a string representation of a string. */
     toString(): string;
+    
+    /** Creates a string representation of this object that can be fed back to eval() to re-create an object. Works only with built-in classes. */
+    toSource(): string;
+    
+    /** Returns itself. */
+    valueOf(): string;
 
     /**
       * Returns the character at the specified index.
@@ -451,6 +391,15 @@ interface Number {
       * @param radix Specifies a radix for converting numeric values to strings. This value is only used for numbers.
       */
     toString(radix?: number): string;
+    
+    /** Returns the value of a Number object converted to a string, using localized conventions. */
+    toLocaleString(): string;
+    
+    /** Creates a string representation of this object that can be fed back to eval() to re-create an object. Works only with built-in classes. */
+    toSource(): string;
+    
+    /** Returns the value of a Number object as a primitive number. */
+    valueOf(): number;
 
     /** 
       * Returns a string representing a number in fixed-point notation.
@@ -502,10 +451,6 @@ declare var Number: {
       * JavaScript displays POSITIVE_INFINITY values as infinity. 
       */
     POSITIVE_INFINITY: number;
-}
-
-interface TemplateStringsArray extends Array<string> {
-    raw: string[];
 }
 
 interface Math {
@@ -623,6 +568,8 @@ declare var Math: Math;
 interface Date {
     /** Returns a string representation of a date. The format of the string depends on the locale. */
     toString(): string;
+    /** Creates a string representation of this object that can be fed back to eval() to re-create an object. Works only with built-in classes. */
+    toSource(): string;
     /** Returns a date as a string value. */
     toDateString(): string;
     /** Returns a time as a string value. */
@@ -767,8 +714,7 @@ interface Date {
     setUTCFullYear(year: number, month?: number, date?: number): number;
     /** Returns a date converted to a string using Universal Coordinated Time (UTC). */
     toUTCString(): string;
-    /** Returns a date as a string value in ISO format. */
-    toISOString(): string;
+    toGMTString(): string;
     /** Used by the JSON.stringify method to enable the transformation of an object's data for JavaScript Object Notation (JSON) serialization. */
     toJSON(key?: any): string;
 }
@@ -810,6 +756,12 @@ interface RegExpExecArray extends Array<string> {
 }
 
 interface RegExp {
+    /** Converts this RegExp object to a string. */
+    toString(): string;
+    
+    /** Creates a string representation of this object that can be fed back to eval() to re-create an object. Works only with built-in classes. */
+    toSource(): string;
+    
     /** 
       * Executes a search on a string using a regular expression pattern, and returns an array containing the results of that search.
       * @param string The String object or string literal on which to perform the search.
@@ -839,21 +791,44 @@ interface RegExp {
     // Non-standard extensions
     compile(): RegExp;
 }
+
 declare var RegExp: {
     new (pattern: string, flags?: string): RegExp;
     (pattern: string, flags?: string): RegExp;
-
-    // Non-standard extensions
+    
+    /** The matched subexpression #1. */
     $1: string;
+    /** The matched subexpression #2. */
     $2: string;
+    /** The matched subexpression #3. */
     $3: string;
+    /** The matched subexpression #4. */
     $4: string;
+    /** The matched subexpression #5. */
     $5: string;
+    /** The matched subexpression #6. */
     $6: string;
+    /** The matched subexpression #7. */
     $7: string;
+    /** The matched subexpression #8. */
     $8: string;
+    /** The matched subexpression #9. */
     $9: string;
+    /**  The original input string. */
+    input: string;
+    $_: string;
+    /** The last match. */
     lastMatch: string;
+    ['$&']: string;
+    /** The value of the last matched subexpression. */
+    lastParen: string;
+    ['$+']: string;
+    /** The string before the match. */
+    leftContext: string;
+    ['$`']: string;
+    /** The string after the match. */
+    rightContext: string;
+    ["$'"]: string;
 }
 
 interface Error {
@@ -1116,6 +1091,7 @@ interface Array<T> {
 
     [n: number]: T;
 }
+
 declare var Array: {
     new (arrayLength?: number): any[];
     new <T>(arrayLength: number): T[];
@@ -1126,4 +1102,3 @@ declare var Array: {
     isArray(arg: any): boolean;
     prototype: Array<any>;
 }
-

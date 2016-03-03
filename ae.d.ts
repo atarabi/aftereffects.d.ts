@@ -1,4 +1,4 @@
-/// <reference path="./lib.d.ts" />
+/// <reference path="./lib.es.d.ts" />
 /// <reference path="./es.d.ts" />
 /// <reference path="./ui.d.ts" />
 /// <reference path="./ae.constants.d.ts" />
