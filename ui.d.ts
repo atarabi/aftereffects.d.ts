@@ -393,6 +393,7 @@ declare class DropDownList extends _ListControl {
 
 declare class EditText extends _Control {
 	active: boolean;
+	characters: number;
 	justify: string;
 	shortcutKey: string;
 	text: string;
@@ -524,6 +525,7 @@ declare class Slider extends _Control {
 
 declare class StaticText extends _Control {
 	active: boolean;
+	characters: number;
 	justify: string;
 	shortcutKey: string;
 	text: string;
