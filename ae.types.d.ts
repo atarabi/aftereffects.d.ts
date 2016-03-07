@@ -139,7 +139,7 @@ declare class Preferences {
   getPrefAsFloat(section: string, key: string, type?: PREFType): number;
   getPrefAsLong(section: string, key: string, type?: PREFType): number;
   getPrefAsString(section: string, key: string, type?: PREFType): string;
-  havePref(section: string, key: string, index?: number, type?: PREFType): boolean;
+  havePref(section: string, key: string, type?: PREFType): boolean;
   reload(): void;
   savePrefAsBool(section: string, key: string, value: boolean, type?: PREFType): void;
   savePrefAsFloat(section: string, key: string, value: number, type?: PREFType): void;
@@ -649,6 +649,9 @@ declare class Layer {
 
   /** When true, the layer’s name has been explicitly set. */
   isNameSet: boolean;
+  
+  /** The label color for the layer. */
+  label: number;
 
   /** Deletes the layer from the composition. */
   remove(): void;
