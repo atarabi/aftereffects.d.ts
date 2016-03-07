@@ -372,6 +372,7 @@ declare class Button extends _Control {
 
 declare class Checkbox extends _Control {
 	active: boolean;
+	characters: number;
 	justify: string;
 	shortcutKey: string;
 	text: string;
