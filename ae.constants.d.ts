@@ -141,8 +141,8 @@ declare const enum CommandID {
   /*
   * Layer
   */
-  NewText = 7058,
-  NewSolid = 3000,
+  NewText = 2836,
+  NewSolid = 2038,
   NewLight = 2563,
   NewCamera = 2564,
   NewNullObject = 2767,
