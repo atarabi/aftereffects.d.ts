@@ -351,6 +351,7 @@ declare class _ListControl extends _Control {
 	
 	add(type: 'item', text: string, index?: number): ListItem;
 	add(type: 'separator', text: string, index?: number): void;
+	add(type: 'node', text: string, index?: number): _Node;
 	find(text: string): ListItem;
 	remove(index: number): void;
 	remove(text: string): void;
@@ -477,6 +478,16 @@ declare class ListItem extends __Control{
 	
 	toString(): string;
 	valueOf(): number;
+}
+
+declare class _Node extends ListItem {
+  add(type: 'item', name: string): ListItem;
+  add(type: 'node', name: string): _Node;
+  find(text: string): ListItem;
+	remove(index: number): void;
+	remove(text: string): void;
+	remove(child: ListItem): void;
+	removeAll(): void;
 }
 
 declare class ProgressBar extends _Control {
