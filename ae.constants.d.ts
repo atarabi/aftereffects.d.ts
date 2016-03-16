@@ -196,7 +196,7 @@ declare const enum CommandID {
   LayerStylesOuterGlow = 9002,
   LayerStylesInnerGlow = 9003,
   LayerStylesBevelAndEmboss = 9004,
-  LayerStylesStain = 9005,
+  LayerStylesSatin = 9005,
   LayerStylesColorOverlay = 9006,
   LayerStylesGradientOverlay = 9007,
   LayerStylesStroke = 9008,
