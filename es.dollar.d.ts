@@ -143,7 +143,7 @@ declare class $ {
      * TODO: Type up a screen. There is no formal type in the docs, just the
      * shape.
      */
-    static screens: any[]
+    static screens: {left: number; top: number; right: number; bottom: number; primary: boolean;}[]
 
     /*
      * The current stack trace.
