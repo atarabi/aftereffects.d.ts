@@ -213,13 +213,13 @@ declare class _WindowOrContainer {
 	
 	add(type: 'button', bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): Button;
 	add(type: 'checkbox', bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): Checkbox;
-	add(type: 'dropdownlist', bounds: Bounds, items?: string[], creation_properties?: {name?: string; items?: string[];}): DropDownList;
+	add(type: 'dropdownlist', bounds?: Bounds, items?: string[], creation_properties?: {name?: string; items?: string[];}): DropDownList;
 	add(type: 'edittext', bounds?: Bounds, text?: string, creation_properties?: {name?: string; readonly?: boolean; noecho?: boolean; enterKeySignalsOnChange?: boolean; borderless?: boolean; multiline?: boolean; scrollable?: boolean;}): EditText;
 	add(type: 'flashplayer', bounds?: Bounds, movieToLoad?: string | File, creation_properties?: {name?: string;}): FlashPlayer;
 	add(type: 'group', bounds?: Bounds, creation_properties?: {name?: string;}): Group;
 	add(type: 'iconbutton', bounds?: Bounds, icon?: string | File, creation_properties?: {name?: string; style?: string; toggle?: boolean;}): IconButton;
 	add(type: 'image', bounds?: Bounds, icon?: string | File, creation_properties?: {name?: string;}): Image;
-	add(type: 'listbox', bounds: Bounds, items?: string[], creation_properties?: {name?: string; multiselect?: boolean; items?: string[]; numberOfColumns?: number; showHeaders?: boolean; columnWidths?: number[]; columnTitles?: string[];}): ListBox;
+	add(type: 'listbox', bounds?: Bounds, items?: string[], creation_properties?: {name?: string; multiselect?: boolean; items?: string[]; numberOfColumns?: number; showHeaders?: boolean; columnWidths?: number[]; columnTitles?: string[];}): ListBox;
 	add(type: 'panel', bounds?: Bounds, text?: string, creation_properties?: {name?: string; borderStyle?: string; su1PanelCoordinates?: boolean;}): Panel;
 	add(type: 'progressbar', bounds?: Bounds, value?: number, minvalue?: number, maxvalue?: number, creation_properties?: {name?: string;}): ProgressBar;
 	add(type: 'radiobutton', bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): RadioButton;
@@ -385,7 +385,7 @@ declare class Checkbox extends _Control {
 
 declare class DropDownList extends _ListControl {
 	active: boolean;
-	selection: ListItem;
+	selection: ListItem | number;
 	shortcutKey: string;
 	title: string;
 	titleLayout: _TitleLayout;
@@ -450,7 +450,7 @@ declare class ListBox extends _ListControl {
 		titles: string[],
 		preferredWidths: number[]
 	};
-	selection: ListItem[];
+	selection: ListItem[] | ListItem | number;
 	shortcutKey: string;
 	
 	revealItem(item: ListItem): void;
