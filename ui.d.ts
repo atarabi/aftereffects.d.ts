@@ -262,7 +262,7 @@ declare class Window extends _WindowOrContainer{
 	static find(type: string, title: string): Window;
 	static prompt(message: string, preset: string, title?: string): string;
 
-	constructor(type: 'dialog' | 'palette', title?: string, bounds?: Bounds, creation_properties?: {
+	constructor(type: 'dialog' | 'palette' | 'window', title?: string, bounds?: Bounds, creation_properties?: {
 		resizeable?: boolean;
 		closeButton?: boolean;
 		maximizeButton?: boolean;
