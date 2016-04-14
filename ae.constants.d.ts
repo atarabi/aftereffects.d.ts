@@ -29,7 +29,7 @@ declare const enum CommandID {
   CloseProject = 3154,
   Save = 5,
   SaveAs = 6,
-  SaveAsACopy = 2166,
+  SaveACopy = 2166,
   SaveACopyAsXML = 3785,
   IncrementAndSave = 3088,
   Revert = 7,
