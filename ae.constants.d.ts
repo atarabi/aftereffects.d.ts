@@ -274,6 +274,28 @@ declare const enum CommandID {
   SnapToGrid = 2278,
 
   ShowLayerControls = 2435,
+  
+  /*
+  * Window
+  */
+  Align = 5022,
+  Audio = 2029,
+  Brushed = 3014,
+  Character = 3011,
+  EffectsAndPresets = 3718,
+  Info = 2028,
+  MaskInterpolation = 5027,
+  MediaBrowser = 4013,
+  Metadata = 3788,
+  MotionSketch = 5024,
+  Paint = 3045,
+  Paragraph = 3012,
+  Preview = 2031,
+  Progress = 4005,
+  Smoother = 5028,
+  Tools = 2010,
+  Tracker = 5005,
+  Wiggler = 5030,
 }
 
 declare enum Language {
