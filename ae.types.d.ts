@@ -115,7 +115,7 @@ declare class Application {
   activate(): void;
 
   /** Schedules a JavaScript script for delayed execution. */
-  scheduleTask(stringToExecute: string, delay: number, repeat: boolean): void;
+  scheduleTask(stringToExecute: string, delay: number, repeat: boolean): number;
 
   /** Cancels a scheduled task. */
   cancelTask(taskID: number): void;
