@@ -1236,7 +1236,7 @@ declare class RenderQueue {
   stopRendering(): void;
 
   /** Gets a render-queue item from the collection. */
-  item(index: RenderQueueItem): Item;
+  item(index: number): RenderQueueItem;
 }
 
 /** The RenderQueueItem object represents an individual item in the render queue. It provides access to the specific settings for an item to be rendered. Create the object by adding a composition to the Render Queue with the RQItemCollection object; */
