@@ -592,6 +592,11 @@ declare class KeyframeEase {
 }
 
 /** The Layer object provides access to layers within compositions. It can be accessed from an item’s layer collection either by index number or by a name string. */
+declare interface Layer {
+  (index: number): PropertyBase;
+  (name: string): PropertyBase;
+}
+
 declare class Layer {
   /** The index position of the layer. */
   index: number;
@@ -1136,6 +1141,11 @@ declare class Property extends PropertyBase {
 }
 
 /** Properties are accessed by name through layers, using various kinds of expression syntax, as controlled by application preferences. */
+declare interface PropertyBase {
+  (index: number): PropertyBase;
+  (name: string): PropertyBase;
+}
+
 declare class PropertyBase {
   /** Name of the property. */
   name: string;
