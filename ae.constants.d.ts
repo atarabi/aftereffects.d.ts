@@ -6,7 +6,10 @@ declare const enum AppVersion {
   CS6 = 11.0,
   CC = 12.0,
   CC2014 = 13.0,
-  CC2015 = 13.5
+  CC2015 = 13.5,
+  CC2015_1 = 13.6,
+  CC2015_2 = 13.7,
+  CC2015_3 = 13.8,
 }
 
 declare const enum CommandID {
