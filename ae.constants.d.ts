@@ -605,3 +605,11 @@ declare enum ChannelType {
   CHANNEL_ALPHA_OVERLAY,
   CHANNEL_ALPHA_BOUNDARY,
 }
+
+/** CC2015.3- */
+declare enum GpuAccelType {
+  CUDA,
+  METAL,
+  OPENCL,
+  SOFTWARE,
+}

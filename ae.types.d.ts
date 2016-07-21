@@ -72,6 +72,9 @@ declare class Application {
   // Preferences
   readonly preferences: Preferences;
 
+  /** CC2015.3- */
+  gpuAccelType: GpuAccelType;
+
   /** Creates a new project in After Effects. */
   newProject(): Project | null;
 
