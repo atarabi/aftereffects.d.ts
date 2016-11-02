@@ -10,6 +10,7 @@ declare const enum AppVersion {
   CC2015_1 = 13.6,
   CC2015_2 = 13.7,
   CC2015_3 = 13.8,
+  CC2017 = 14.0,
 }
 
 declare const enum CommandID {
@@ -277,7 +278,7 @@ declare const enum CommandID {
   SnapToGrid = 2278,
 
   ShowLayerControls = 2435,
-  
+
   /*
   * Window
   */
