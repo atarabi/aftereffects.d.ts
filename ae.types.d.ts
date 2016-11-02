@@ -402,6 +402,9 @@ declare class CompItem extends AVItem {
   /** The layers of the composition. */
   readonly layers: LayerCollection;
 
+  /** CC 2017(14.0)- The markers of the composition. */
+  readonly markerProperty: Property;
+
   /** The selected layers of the composition. */
   readonly selectedLayers: Layer[];
 
@@ -657,7 +660,7 @@ declare class Layer {
 
   /** When true, the layer’s name has been explicitly set. */
   readonly isNameSet: boolean;
-  
+
   /** The label color for the layer. */
   label: number;
 
@@ -1321,7 +1324,7 @@ declare class RenderQueueItem {
 declare class RQItemCollection extends Collection {
   /** Retrieves an RenderQueueItem in the collection by its index number. The first object is at index 1. */
   [index: number]: RenderQueueItem;
-  
+
   /** Adds a composition to the Render Queue. */
   add(comp: CompItem): RenderQueueItem;
 }
