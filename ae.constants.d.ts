@@ -10,6 +10,7 @@ declare const enum AppVersion {
   CC2015_1 = 13.6,
   CC2015_2 = 13.7,
   CC2015_3 = 13.8,
+  CC2017 = 14.0,
 }
 
 declare const enum CommandID {
@@ -277,7 +278,7 @@ declare const enum CommandID {
   SnapToGrid = 2278,
 
   ShowLayerControls = 2435,
-  
+
   /*
   * Window
   */
@@ -612,4 +613,37 @@ declare enum GpuAccelType {
   METAL,
   OPENCL,
   SOFTWARE,
+}
+
+/** CC2017- */
+declare enum ToolType {
+  Tool_Arrow = 8812,
+  Tool_Rotate,
+  Tool_CameraMaya,
+  Tool_CameraOrbit,
+  Tool_CameraTrackXY,
+  Tool_CameraTrackZ,
+  Tool_Paintbrush,
+  Tool_CloneStamp,
+  Tool_Eraser,
+  Tool_Hand,
+  Tool_Magnify,
+  Tool_PanBehind,
+  Tool_Rect,
+  Tool_RoundedRect,
+  Tool_Oval,
+  Tool_Polygon,
+  Tool_Star,
+  Tool_TextH,
+  Tool_TextV,
+  Tool_Pen,
+  Tool_Feather,
+  Tool_PenPlus,
+  Tool_PenMinus,
+  Tool_PenConvert,
+  Tool_Pin,
+  Tool_PinStarch,
+  Tool_PinDepth,
+  Tool_Quickselect,
+  Tool_Hairbrush,
 }
