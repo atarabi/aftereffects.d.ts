@@ -72,9 +72,6 @@ declare class Application {
   // Preferences
   readonly preferences: Preferences;
 
-  /** CC2015.3- */
-  gpuAccelType: GpuAccelType;
-
   /** CC2017- */
   availableGPUAccelTypes: GpuAccelType;
 
@@ -928,7 +925,7 @@ declare class Project {
   /** The Use Feet + Frames menu setting in the Project Settings dialog box. */
   feetFramesFilmType: FeetFramesFilmType;
 
-  /** CC 2017(14.0)- */
+  /** CC 2015.3(13.8)- */
   gpuAccelType: GpuAccelType;
 
   /** The Frame Count menu setting in the Project Settings dialog box. */
