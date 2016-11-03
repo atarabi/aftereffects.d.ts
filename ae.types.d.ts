@@ -913,6 +913,9 @@ declare class Project {
   /** The time display style, corresponding to the Time Display Style section in the Project Settings dialog box. */
   timeDisplayType: TimeDisplayType;
 
+  /** CC 2017(14.0)- The active tool in the Tools panel. */
+  toolType: ToolType;
+
   /** The Footage Start Time setting in the Project Settings dialog box, which is enabled when Timecode is selected as the time display style. */
   footageTimecodeDisplayStartType: FootageTimecodeDisplayStartType;
 
