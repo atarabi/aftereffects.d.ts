@@ -75,6 +75,9 @@ declare class Application {
   /** CC2015.3- */
   gpuAccelType: GpuAccelType;
 
+  /** CC2017- */
+  availableGPUAccelTypes: GpuAccelType;
+
   /** Creates a new project in After Effects. */
   newProject(): Project | null;
 
@@ -924,6 +927,9 @@ declare class Project {
 
   /** The Use Feet + Frames menu setting in the Project Settings dialog box. */
   feetFramesFilmType: FeetFramesFilmType;
+
+  /** CC 2017(14.0)- */
+  gpuAccelType: GpuAccelType;
 
   /** The Frame Count menu setting in the Project Settings dialog box. */
   framesCountType: FramesCountType;
