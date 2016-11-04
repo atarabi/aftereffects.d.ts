@@ -1243,7 +1243,7 @@ declare class RenderQueue {
   readonly numItems: number;
 
   /** CC 2017(14.0)- */
-  canQueueInAME: boolean;
+  readonly canQueueInAME: boolean;
 
   /** The collection of items in the render queue. */
   readonly items: RQItemCollection;
