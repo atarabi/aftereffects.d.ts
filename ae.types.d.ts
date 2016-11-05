@@ -1242,6 +1242,9 @@ declare class RenderQueue {
   /** The total number of items in the render queue. */
   readonly numItems: number;
 
+  /** CC 2017(14.0)- */
+  readonly canQueueInAME: boolean;
+
   /** The collection of items in the render queue. */
   readonly items: RQItemCollection;
 
@@ -1259,6 +1262,9 @@ declare class RenderQueue {
 
   /** Gets a render-queue item from the collection. */
   item(index: number): RenderQueueItem;
+
+  /** CC 2017(14.0)- */
+  queueInAME(render_immediately_in_AME: boolean): void;
 }
 
 /** The RenderQueueItem object represents an individual item in the render queue. It provides access to the specific settings for an item to be rendered. Create the object by adding a composition to the Render Queue with the RQItemCollection object; */
