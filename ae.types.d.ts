@@ -291,9 +291,6 @@ declare class AVLayer extends Layer {
   /** The layer quality setting. */
   quality: LayerQuality;
 
-  /** The type of automatic orientation for the layer. */
-  autoOrient: AutoOrientType;
-
   /** The layer sampling quality setting. */
   samplingQuality: LayerSamplingQuality;
 
@@ -663,6 +660,9 @@ declare class Layer {
 
   /** The label color for the layer. */
   label: number;
+
+  /** The type of automatic orientation for the layer. */
+  autoOrient: AutoOrientType;
 
   /** Deletes the layer from the composition. */
   remove(): void;
