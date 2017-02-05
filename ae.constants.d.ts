@@ -617,7 +617,7 @@ declare enum GpuAccelType {
 
 /** CC2017- */
 declare enum ToolType {
-  Tool_Arrow = 8812,
+  Tool_Arrow,
   Tool_Rotate,
   Tool_CameraMaya,
   Tool_CameraOrbit,
