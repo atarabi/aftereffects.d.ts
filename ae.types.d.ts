@@ -1413,7 +1413,7 @@ declare class Swatch {
 /** The file specification, an ExtendScript File object. */
 declare class SwatchValue {
   /** One of "RGB", "CMYK", "LAB", "Gray" */
-  type: string;
+  type: "RGB" | "CMYK" | "LAB" | "Gray";
 
   /** When type = "RGB", the color values in the range [0.0..1.0]. 0, 0, 0 is Black. */
   r: number;
