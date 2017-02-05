@@ -124,7 +124,7 @@ declare class Application {
   cancelTask(taskID: number): void;
 
   /** Loads a color swatch from an Adobe Swatch Exchange (ASE) file. */
-  parseSwatchFile(file: File): void;
+  parseSwatchFile(file: File): Swatch;
 
   findMenuCommandId(str: string): number;
 
@@ -1396,6 +1396,44 @@ declare class ShapeLayer extends AVLayer { }
 declare class SolidSource extends FootageSource {
   /** The color of the solid. */
   color: [number, number, number];
+}
+
+/** The file specification, an ExtendScript File object. */
+declare class Swatch {
+  /** The ASE version number. */
+  majorVersion: number;
+
+  /** The ASE version number. */
+  minorVersion: number;
+
+  /** An array of SwatchValue. */
+  values: SwatchValue[];
+}
+
+/** The file specification, an ExtendScript File object. */
+declare class SwatchValue {
+  /** One of "RGB", "CMYK", "LAB", "Gray" */
+  type: string;
+
+  /** When type = "RGB", the color values in the range [0.0..1.0]. 0, 0, 0 is Black. */
+  r: number;
+  g: number;
+  b: number;
+
+  /** When type = "CMYK", the color values in the range [0.0..1.0]. 0, 0, 0, 0 is White. */
+  c: number;
+  m: number;
+  y: number;
+  k: number;
+
+  /** When type = "LAB", the color values. L is in the range [0.0..1.0]. a and b are in the range [-128.0..+128.0] 0, 0, 0 is Black. */
+  L: number;
+  a: number;
+  // b:number;
+
+  /** When type = "Gray", the value range is [0.0..1.0]. 0.0 is Black. */
+  gray: number;
+  value: number;
 }
 
 /** The System object provides access to attributes found on the user’s system, such as the user name and the name and version of the operating system. It is available through the system global variable. */
