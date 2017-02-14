@@ -428,6 +428,7 @@ declare class IconButton extends _Control {
   text: string;
   title: string;
   titleLayout: _TitleLayout;
+  value: boolean;
 
   onClick: Function;
   onShortcutKey: Function;
