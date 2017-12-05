@@ -402,6 +402,9 @@ declare class CompItem extends AVItem {
   /** CC 2017(14.0)- The markers of the composition. */
   readonly markerProperty: Property;
 
+  /** CC 2018(15.0)- The name property in the Essential Graphics panel for the composition. */
+  motionGraphicsTemplateName: string;
+
   /** The selected layers of the composition. */
   readonly selectedLayers: Layer[];
 
@@ -417,10 +420,16 @@ declare class CompItem extends AVItem {
   /** Creates and returns a duplicate of this composition. */
   duplicate(): CompItem;
 
+  /** CC 2018(15.0)- Export the composition as a Motion Graphics template. */
+  exportAsMotionGraphicsTemplate(doOverWriteFileIfExisting: boolean, file_path?: File): boolean;
+
   /** Gets a layer from this composition. */
   layer(index: number): Layer;
   layer(otherLayer: Layer, relIndex: number): Layer;
   layer(name: string): Layer;
+
+  /** CC 2018(15.0) Open the composition in the Essential Graphics panel. */
+  openInEssentialGraphics(): void;
 
   /** Opens the composition in a Composition panel. */
   openInViewer(): Viewer | null;
@@ -1025,28 +1034,34 @@ declare class Property extends PropertyBase {
 
   /** The error, if any, that occurred when the last expression was evaluated. */
   readonly expressionError: string;
-
+  
   /** All selected keyframes of the property. */
   readonly selectedKeys: number[];
-
+  
   /** The position index of this property. */
   readonly propertyIndex: number;
-
+  
   /** When true, the property’s dimensions are represented as separate properties. */
   dimensionsSeparated: boolean;
-
+  
   /** When true, the property represents one of the separated dimensions for a multidimensional property. */
   readonly isSeparationFollower: boolean;
-
+  
   /** When true, the property is multidimensional and can be separated. */
   readonly isSeparationLeader: boolean;
-
+  
   /** For a separated follower, the dimension it represents in the multidimensional leader. */
   readonly separationDimension: number;
-
+  
   /** The original multidimensional property for this separated follower. */
   readonly separationLeader: Property;
 
+  /** CC 2018(15.0)- Add the property to the Essential Graphics panel for the specified composition. */
+  addToMotionGraphicsTemplate(comp: CompItem): boolean;
+
+  /** CC 2018(15.0)- Test whether or not the property can be added to the Essential Graphics panel for the specified composition. */
+  canAddToMotionGraphicsTemplate(comp: CompItem): boolean;
+  
   /** Gets the value of the property evaluated at given time. */
   valueAtTime(time: number, preExpression: boolean): PropertyValue;
 
