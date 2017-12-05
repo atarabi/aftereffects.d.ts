@@ -11,6 +11,7 @@ declare const enum AppVersion {
   CC2015_2 = 13.7,
   CC2015_3 = 13.8,
   CC2017 = 14.0,
+  CC2017_2 = 14.2,
   CC2018 = 15.0
 }
 
@@ -647,4 +648,11 @@ declare enum ToolType {
   Tool_PinDepth,
   Tool_Quickselect,
   Tool_Hairbrush,
+}
+
+/** CC2017.2- */
+declare enum ResolveType {
+  ACCEPT_THEIRS,
+  ACCEPT_YOURS,
+  ACCEPT_THEIRS_AND_COPY,
 }

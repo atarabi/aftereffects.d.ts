@@ -984,6 +984,51 @@ declare class Project {
 
   /** Automatically replaces text in all expressions. */
   autoFixExpressions(oldText: string, newText: string): void;
+
+  /** CC 2017.2(14.2)- Creates a new team project. Returns true if the team project is successfully created, false otherwise. */
+  newTeamProject(teamProjectName: string, description?: string): boolean;
+
+  /** CC 2017.2(14.2)- Opens a team project. Returns true if the team project is successfully opened, false otherwise. */
+  openTeamProject(teamProjectName: string): boolean;
+
+  /** CC 2017.2(14.2)- Shares the currently open team project. Returns true if the team project is successfully shared, false otherwise. */
+  shareTeamProject(comment?: string): boolean;
+
+  /** CC 2017.2(14.2)- Syncs the currently open team project. Returns true if the team project is successfully synced, false otherwise. */
+  syncTeamProject(): boolean;
+
+  /** CC 2017.2(14.2)- Closes a currently open team project. Returns true if the command was successful, false otherwise. */
+  closeTeamProject(): boolean;
+
+  /** CC 2017.2(14.2)- Converts a team project to an After Effects project on a local disk. Returns true if the command was successful, false otherwise. */
+  convertTeamProjectToProject(project: File): boolean;
+
+  /** CC 2017.2(14.2)- Returns an array containing the name strings for all team projects available for the current user. Archived Team Projects are not included. */
+  listTeamProjects(): string[];
+
+  /** CC 2017.2(14.2)- Returns true if the specified team project is currently open, false otherwise. */
+  isTeamProjectOpen(teamProjectName: string): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if any team project is currently open, false otherwise. */
+  isAnyTeamProjectOpen(): boolean;
+
+  /** CC 2017.2(14.2)- Checks whether or not team projects is enabled for After Effects. Returns true if team projects is currently enabled, false otherwise. (This will almost always return true.) */
+  isTeamProjectEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the client (After Effects) is currently logged into the team projects server, false otherwise. */
+  isLoggedInToTeamProject(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the team projects Sync command is enabled, false otherwise. */
+  isSyncCommandEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the team projects Share command is enabled, false otherwise. */
+  isShareCommandEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the team projects Resolve command is enabled, false otherwise. */
+  isResolveCommandEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Resolves a conflict between the open team project and the version on the team projects server, using the specified resolution method. Returns true if the resolution of the specified type was successful, false otherwise. */
+  resolveConflict(ResolveType: ResolveType): boolean;
 }
 
 declare type PropertyValue = void | boolean | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
@@ -1560,6 +1605,9 @@ declare class TextDocument {
   /** CC 2015(13.6)- */
   readonly baselineLocs: number[];
 
+  /** CC 2017.2(14.2)- The text layer’s spacing between lines. */
+  leading: number;
+  
   /** Restores the default character settings in the Character panel. */
   resetCharStyle(): void;
 
