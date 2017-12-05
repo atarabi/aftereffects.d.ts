@@ -1,5 +1,5 @@
 /** Clears text from the Info panel. */
-declare var claerOutput: () => void;
+declare var clearOutput: () => void;
 
 /** Converts string time value to a numeric time value. */
 declare var currentFormatToTime: (formattedTime: string, fps: number, isDuration?: boolean) => number;
@@ -402,6 +402,9 @@ declare class CompItem extends AVItem {
   /** CC 2017(14.0)- The markers of the composition. */
   readonly markerProperty: Property;
 
+  /** CC 2018(15.0)- The name property in the Essential Graphics panel for the composition. */
+  motionGraphicsTemplateName: string;
+
   /** The selected layers of the composition. */
   readonly selectedLayers: Layer[];
 
@@ -417,10 +420,16 @@ declare class CompItem extends AVItem {
   /** Creates and returns a duplicate of this composition. */
   duplicate(): CompItem;
 
+  /** CC 2018(15.0)- Export the composition as a Motion Graphics template. */
+  exportAsMotionGraphicsTemplate(doOverWriteFileIfExisting: boolean, file_path?: File): boolean;
+
   /** Gets a layer from this composition. */
   layer(index: number): Layer;
   layer(otherLayer: Layer, relIndex: number): Layer;
   layer(name: string): Layer;
+
+  /** CC 2018(15.0) Open the composition in the Essential Graphics panel. */
+  openInEssentialGraphics(): void;
 
   /** Opens the composition in a Composition panel. */
   openInViewer(): Viewer | null;
@@ -975,6 +984,51 @@ declare class Project {
 
   /** Automatically replaces text in all expressions. */
   autoFixExpressions(oldText: string, newText: string): void;
+
+  /** CC 2017.2(14.2)- Creates a new team project. Returns true if the team project is successfully created, false otherwise. */
+  newTeamProject(teamProjectName: string, description?: string): boolean;
+
+  /** CC 2017.2(14.2)- Opens a team project. Returns true if the team project is successfully opened, false otherwise. */
+  openTeamProject(teamProjectName: string): boolean;
+
+  /** CC 2017.2(14.2)- Shares the currently open team project. Returns true if the team project is successfully shared, false otherwise. */
+  shareTeamProject(comment?: string): boolean;
+
+  /** CC 2017.2(14.2)- Syncs the currently open team project. Returns true if the team project is successfully synced, false otherwise. */
+  syncTeamProject(): boolean;
+
+  /** CC 2017.2(14.2)- Closes a currently open team project. Returns true if the command was successful, false otherwise. */
+  closeTeamProject(): boolean;
+
+  /** CC 2017.2(14.2)- Converts a team project to an After Effects project on a local disk. Returns true if the command was successful, false otherwise. */
+  convertTeamProjectToProject(project: File): boolean;
+
+  /** CC 2017.2(14.2)- Returns an array containing the name strings for all team projects available for the current user. Archived Team Projects are not included. */
+  listTeamProjects(): string[];
+
+  /** CC 2017.2(14.2)- Returns true if the specified team project is currently open, false otherwise. */
+  isTeamProjectOpen(teamProjectName: string): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if any team project is currently open, false otherwise. */
+  isAnyTeamProjectOpen(): boolean;
+
+  /** CC 2017.2(14.2)- Checks whether or not team projects is enabled for After Effects. Returns true if team projects is currently enabled, false otherwise. (This will almost always return true.) */
+  isTeamProjectEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the client (After Effects) is currently logged into the team projects server, false otherwise. */
+  isLoggedInToTeamProject(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the team projects Sync command is enabled, false otherwise. */
+  isSyncCommandEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the team projects Share command is enabled, false otherwise. */
+  isShareCommandEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Returns true if the team projects Resolve command is enabled, false otherwise. */
+  isResolveCommandEnabled(): boolean;
+
+  /** CC 2017.2(14.2)- Resolves a conflict between the open team project and the version on the team projects server, using the specified resolution method. Returns true if the resolution of the specified type was successful, false otherwise. */
+  resolveConflict(ResolveType: ResolveType): boolean;
 }
 
 declare type PropertyValue = void | boolean | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
@@ -1025,28 +1079,34 @@ declare class Property extends PropertyBase {
 
   /** The error, if any, that occurred when the last expression was evaluated. */
   readonly expressionError: string;
-
+  
   /** All selected keyframes of the property. */
   readonly selectedKeys: number[];
-
+  
   /** The position index of this property. */
   readonly propertyIndex: number;
-
+  
   /** When true, the property’s dimensions are represented as separate properties. */
   dimensionsSeparated: boolean;
-
+  
   /** When true, the property represents one of the separated dimensions for a multidimensional property. */
   readonly isSeparationFollower: boolean;
-
+  
   /** When true, the property is multidimensional and can be separated. */
   readonly isSeparationLeader: boolean;
-
+  
   /** For a separated follower, the dimension it represents in the multidimensional leader. */
   readonly separationDimension: number;
-
+  
   /** The original multidimensional property for this separated follower. */
   readonly separationLeader: Property;
 
+  /** CC 2018(15.0)- Add the property to the Essential Graphics panel for the specified composition. */
+  addToMotionGraphicsTemplate(comp: CompItem): boolean;
+
+  /** CC 2018(15.0)- Test whether or not the property can be added to the Essential Graphics panel for the specified composition. */
+  canAddToMotionGraphicsTemplate(comp: CompItem): boolean;
+  
   /** Gets the value of the property evaluated at given time. */
   valueAtTime(time: number, preExpression: boolean): PropertyValue;
 
@@ -1545,6 +1605,9 @@ declare class TextDocument {
   /** CC 2015(13.6)- */
   readonly baselineLocs: number[];
 
+  /** CC 2017.2(14.2)- The text layer’s spacing between lines. */
+  leading: number;
+  
   /** Restores the default character settings in the Character panel. */
   resetCharStyle(): void;
 
