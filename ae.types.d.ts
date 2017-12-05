@@ -1,5 +1,5 @@
 /** Clears text from the Info panel. */
-declare var claerOutput: () => void;
+declare var clearOutput: () => void;
 
 /** Converts string time value to a numeric time value. */
 declare var currentFormatToTime: (formattedTime: string, fps: number, isDuration?: boolean) => number;
