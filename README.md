@@ -2,6 +2,8 @@
 
 TypeScript type definitions for After Effects Script.
 
+Types definitions have been merged into [types-for-adobe repository](https://github.com/pravdomil/types-for-adobe).
+
 ## Usage
 ```ts
 /// <reference path="./ae.d.ts"/>
