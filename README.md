@@ -11,5 +11,5 @@ Types definitions have been merged into [types-for-adobe repository](https://git
 
 ## Compile
 ```bash
-tsc script.ts --out script.jsx -t es3 -noLib
+tsc script.ts --out script.jsx --noLib
 ```
