@@ -789,6 +789,12 @@ declare class MarkerValue {
   /** A specific frame target within the Web page specified by url. */
   frameTarget: string;
 
+  /** CC2019(16.0)- */
+  label: number;
+
+  /** CC2019(16.0)- */
+  protectedRegion: number;
+
   /** Retrieves the key-value pairs associated with the marker value. */
   getParameters(): Object;
 
@@ -949,6 +955,15 @@ declare class Project {
   /** The project’s XMP metadata. */
   xmpPacket: string;
 
+  /** CC2019(16.0)- */
+  workingGamma: 2.2 | 2.4;
+
+  /** CC2019(16.0)- */
+  workingSpace: string;
+
+  /** CC2019(16.0)- */
+  expressionEngine: 'extendscript' | 'javascript-1.0';
+
   /** Retrieves an item from the project. */
   item(index: number): Item;
 
@@ -1029,6 +1044,9 @@ declare class Project {
 
   /** CC 2017.2(14.2)- Resolves a conflict between the open team project and the version on the team projects server, using the specified resolution method. Returns true if the resolution of the specified type was successful, false otherwise. */
   resolveConflict(ResolveType: ResolveType): boolean;
+
+  /** CC2019(16.0)- */
+  listColorProfiles(): string[];
 }
 
 declare type PropertyValue = void | boolean | number | [number, number] | [number, number, number] | [number, number, number, number] | MarkerValue | Shape | TextDocument;
