@@ -689,7 +689,7 @@ declare class Layer {
   moveBefore(layer: Layer): void;
 
   /** Duplicates the layer. */
-  duplicate(): Layer;
+  duplicate(): this;
 
   /** Copies the layer to the top (beginning) of another composition. */
   copyToComp(intoComp: CompItem): void;
@@ -974,7 +974,7 @@ declare class Project {
   importPlaceholder(name: string, width: number, height: number, frameRate: number, duration: number): PlaceholderItem;
 
   /** Imports a file into the project. */
-  importFile(importOptions: ImportOptions): FootageItem;
+  importFile(importOptions: ImportOptions): FootageItem | FolderItem;
 
   /** Displays an Import File dialog box. */
   importFileWithDialog(): Item[] | null;
@@ -1152,25 +1152,22 @@ declare class Property extends PropertyBase {
   keyOutInterpolationType(keyIndex: number): KeyframeInterpolationType;
 
   /** Sets the “in” and “out” tangent vectors for a key. */
-  setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number], outTangent: typeof inTangent): void;
-  setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number, number], outTangent: typeof inTangent): void;
+  setSpatialTangentsAtKey(keyIndex: number, inTangent: [number, number, number?], outTangent: typeof inTangent): void;
 
   /** Gets the “in” spatial tangent for a key. */
-  keyInSpatialTangent(keyIndex: number): [number, number] | [number, number, number];
+  keyInSpatialTangent(keyIndex: number): [number, number, number?];
 
   /** Gets the “out” spatial tangent for a key. */
-  keyOutSpatialTangent(keyIndex: number): [number, number] | [number, number, number];
+  keyOutSpatialTangent(keyIndex: number): [number, number, number?];
 
   /** Sets the “in” and “out” temporal ease for a key. */
-  setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase], outTemporalEase: typeof inTemporalEase): void;
-  setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase], outTemporalEase: typeof inTemporalEase): void;
-  setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase, KeyframeEase], outTemporalEase: typeof inTemporalEase): void;
+  setTemporalEaseAtKey(keyIndex: number, inTemporalEase: [KeyframeEase, KeyframeEase?, KeyframeEase?], outTemporalEase: typeof inTemporalEase): void;
 
   /** Gets the “in” temporal ease for a key. */
-  keyInTemporalEase(keyIndex: number): [KeyframeEase] | [KeyframeEase, KeyframeEase] | [KeyframeEase, KeyframeEase, KeyframeEase];
+  keyInTemporalEase(keyIndex: number): [KeyframeEase, KeyframeEase?, KeyframeEase?];
 
   /** Gets the “out” temporal ease for a key. */
-  keyOutTemporalEase(keyIndex: number): [KeyframeEase] | [KeyframeEase, KeyframeEase] | [KeyframeEase, KeyframeEase, KeyframeEase];
+  keyOutTemporalEase(keyIndex: number): [KeyframeEase, KeyframeEase?, KeyframeEase?];
 
   /** Sets whether a keyframe has temporal continuity. */
   setTemporalContinuousAtKey(keyIndex: number, newVal: boolean): void;

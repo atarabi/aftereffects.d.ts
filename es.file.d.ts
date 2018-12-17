@@ -378,7 +378,7 @@ declare class File {
      *
      * TODO: return `(File|File[])` in TSC 1.4
      */
-    openDlg(prompt_?: string, filter?: string, multiSelect?: boolean): File|File[]
+    openDlg(prompt_?: string, filter?: string | string[], multiSelect?: boolean): File|File[]
 
     /*
      * Reads the contents of the file starting at the current position.
