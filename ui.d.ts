@@ -470,7 +470,7 @@ declare class ListItem extends __Control{
   parent: any;
   properties: any;
   selected: boolean;
-  subitems: {
+  subItems: {
     text: string;
     image: Image;
   }[];
