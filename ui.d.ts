@@ -228,7 +228,7 @@ declare class _WindowOrContainer {
   add(type: 'statictext', bounds?: Bounds, text?: string, creation_properties?: {name?: string; multiline?: boolean; scrolling?: boolean; truncate?: string;}): StaticText;
   add(type: 'tab', bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): Tab;
   add(type: 'tabbedpanel', bounds?: Bounds, text?: string, creation_properties?: {name?: string;}): TabbedPanel;
-  add(type: 'treeview', bounds?: Bounds, items?: string[], creation_properties?: {name?: string; itmes?: string[];}): TreeView;
+  add(type: 'treeview', bounds?: Bounds, items?: string[], creation_properties?: {name?: string; items?: string[];}): TreeView;
   addEventListener(eventName: string, handler: (e: UIEvent) => void, capturePhase?: boolean): void;
   dispatchEvent(eventObj: UIEvent): boolean;
   findElement(name: string): any;
