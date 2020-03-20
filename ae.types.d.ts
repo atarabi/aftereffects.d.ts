@@ -132,8 +132,14 @@ declare class Application {
 
   /** CC2015- */
   getenv(name: string): string;
+
+  /** CC2015- */
   setTimeout(func: Function, delay?: number): number;
+  
+  /** CC2015- */
   cancelTimeout(id: number): void;
+
+  objectToJSON(object: any): string;
 }
 
 declare class Preferences {
@@ -209,6 +215,15 @@ declare class AVItem extends Item {
 
   /** Removes the proxy for the item. */
   setProxyToNone(): void;
+
+  /** CC 2019(16.1)-*/
+  addGuide(orientationType: 0 | 1, position: number): number;
+
+  /** CC 2019(16.1)-*/
+  removeGuide(guideIndex: number): void;
+
+  /** CC 2019(16.1)-*/
+  setGuide(position:number, guideIndex: number): void;
 }
 
 /** The AVLayer object provides an interface to those layers that contain AVItem objects (composition layers, footage layers, solid layers, text layers, and sound layers). */
@@ -323,6 +338,7 @@ declare class AVLayer extends Layer {
   readonly geometryOption: _GeometryOptionsGroup;
   readonly materialOption: _MaterialOptionsGroup;
   readonly audio: _AudioGroup;
+  readonly masterProperty: PropertyGroup;
 }
 
 /** The CameraLayer object represents a camera layer within a composition. Create it using the LayerCollection object’s addCamera method */
@@ -405,6 +421,9 @@ declare class CompItem extends AVItem {
   /** CC 2018(15.0)- The name property in the Essential Graphics panel for the composition. */
   motionGraphicsTemplateName: string;
 
+  /** CC 2019(16.1)-*/
+  readonly motionGraphicsTemplateControllerCount: number;
+
   /** The selected layers of the composition. */
   readonly selectedLayers: Layer[];
 
@@ -436,6 +455,12 @@ declare class CompItem extends AVItem {
 
   /** Save the specific frame to a png file */
   saveFrameToPng(time: number, file: File);
+
+  /** CC 2019(16.1)-*/
+  getMotionGraphicsTemplateControllerName(index: number): string;
+
+  /** CC 2019(16.1)-*/
+  setMotionGraphicsControllerName(index: number, newName: string): string;
 }
 
 /** The FileSource object describes footage that comes from a file. */
@@ -824,6 +849,14 @@ declare class MaskPropertyGroup extends PropertyGroup {
 
   /** The feather falloff mode for the mask. */
   maskFeatherFalloff: MaskFeatherFalloff;
+
+  readonly maskShape: Property;
+
+  readonly maskFeather: Property;
+
+  readonly maskOpacity: Property;
+
+  readonly maskExpansion: Property;
 }
 
 /** The OMCollection contains all of the output modules in a render queue. The collection provides access to the OutputModule objects, but does not provide any additional functionality. The first OutputModule object in the collection is at index position 1. */
@@ -1097,34 +1130,37 @@ declare class Property extends PropertyBase {
 
   /** The error, if any, that occurred when the last expression was evaluated. */
   readonly expressionError: string;
-  
+
   /** All selected keyframes of the property. */
   readonly selectedKeys: number[];
-  
+
   /** The position index of this property. */
   readonly propertyIndex: number;
-  
+
   /** When true, the property’s dimensions are represented as separate properties. */
   dimensionsSeparated: boolean;
-  
+
   /** When true, the property represents one of the separated dimensions for a multidimensional property. */
   readonly isSeparationFollower: boolean;
-  
+
   /** When true, the property is multidimensional and can be separated. */
   readonly isSeparationLeader: boolean;
-  
+
   /** For a separated follower, the dimension it represents in the multidimensional leader. */
   readonly separationDimension: number;
-  
+
   /** The original multidimensional property for this separated follower. */
   readonly separationLeader: Property;
+
+  /** 2020(17.0.1)- Returns true if the property is a Dropdown Menu Control effect.*/
+  readonly isDropdownEffect: boolean;
 
   /** CC 2018(15.0)- Add the property to the Essential Graphics panel for the specified composition. */
   addToMotionGraphicsTemplate(comp: CompItem): boolean;
 
   /** CC 2018(15.0)- Test whether or not the property can be added to the Essential Graphics panel for the specified composition. */
   canAddToMotionGraphicsTemplate(comp: CompItem): boolean;
-  
+
   /** Gets the value of the property evaluated at given time. */
   valueAtTime(time: number, preExpression: boolean): PropertyValue;
 
@@ -1225,6 +1261,12 @@ declare class Property extends PropertyBase {
 
   /** For a separated, multidimensional property, retrieves a specific follower property. */
   getSeparationFollower(dim: number): Property;
+
+  /** 2020(17.0.1)- Sets parameters for a Property.*/
+  setPropertyParameters(items: string[]): Property;
+
+  /** CC 2019(16.1)-*/
+  addToMotionGraphicsTemplateAs(comp: CompItem, name: string): boolean;
 }
 
 /** Properties are accessed by name through layers, using various kinds of expression syntax, as controlled by application preferences. */
@@ -1465,7 +1507,9 @@ declare class Shape {
 }
 
 /** The ShapeLayer object represents a shape layer within a composition. Create it using the LayerCollection object’s addShape() method. */
-declare class ShapeLayer extends AVLayer { }
+declare class ShapeLayer extends AVLayer {
+  readonly content: PropertyGroup;
+}
 
 /** The SolidSource object represents a solid-color footage source. */
 declare class SolidSource extends FootageSource {
@@ -1622,7 +1666,7 @@ declare class TextDocument {
 
   /** CC 2017.2(14.2)- The text layer’s spacing between lines. */
   leading: number;
-  
+
   /** Restores the default character settings in the Character panel. */
   resetCharStyle(): void;
 
@@ -1658,6 +1702,7 @@ declare class Viewer {
 
 declare class View {
   readonly active: boolean;
+
   readonly options: ViewOptions;
 
   setActive(): void;
@@ -1665,16 +1710,33 @@ declare class View {
 
 declare class ViewOptions {
   channels: ChannelType;
+
   checkerboards: boolean;
+
   exposure: number;
+
   fastPreview: FastPreviewType;
+
   zoom: number;
+
+  /** CC 2019(16.1)-*/
+  guidesLocked: boolean;
+
+  /** CC 2019(16.1)-*/
+  guidesSnap: boolean;
+
+  /** CC 2019(16.1)-*/
+  guidesVisibility: boolean;
+
+  /** CC 2019(16.1)-*/
+  rulers: boolean;
 }
 
 /*
 * Properties for Shortcuts
 */
 declare class _TransformGroup extends PropertyGroup {
+  readonly pointOfInterest: Property;
   readonly anchorPoint: Property;
   readonly position: Property;
   readonly xPosition: Property;
@@ -1894,6 +1956,7 @@ declare class _TextProperties extends PropertyGroup {
   readonly sourceText: Property;
   readonly pathOption: _TextPathOptions;
   readonly moreOption: _TextMoreOptions;
+  readonly animator: PropertyGroup;
 }
 
 declare class _TextPathOptions extends PropertyGroup {
